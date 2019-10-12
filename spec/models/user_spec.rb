@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { should have_many(:applications).dependent(:destroy) }
+    it { should have_many(:task_applications).dependent(:destroy) }
   end
   
   describe 'validations' do
