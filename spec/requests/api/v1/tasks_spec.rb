@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/api/v1/tasks' do
+describe Api::V1::TasksController, type: :request do
   describe '#index' do
     before do
       FactoryBot.create_list(:task, 10)
