@@ -35,5 +35,6 @@ module Alder
       g.helper false
       g.assets false
     end
+    config.time_zone = 'Tokyo'
   end
 end
