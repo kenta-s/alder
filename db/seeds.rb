@@ -5,3 +5,36 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.create([
+  {
+    display_name: 'user1',
+    email: 'user1@example.com',
+    password: 'aaaaaa',
+    confirmed_at: Time.now,
+  },
+  {
+    display_name: 'user2',
+    email: 'user2@example.com',
+    password: 'aaaaaa',
+    confirmed_at: Time.now,
+  }
+])
+
+Task.create([
+  {
+    title: '求人サイトをクロールしてDBにデータを格納',
+    description: '求人サイトをクロールしてDB（MySQL）にデータを格納してください',
+    end_at: Time.zone.local(2019, 9, 30, 10, 30)
+  },
+  {
+    title: 'ウェブアプリケーション機能開発',
+    description: '個人で開発しているプロジェクトの機能開発を手伝ってください',
+    end_at: Time.zone.local(2019, 10, 10, 11, 30)
+  },
+  {
+    title: 'ウェブアプリケーション機能開発(Rails)',
+    description: 'Rails, React, MySQLを使っているウェブアプリの機能開発を手伝ってください。Slack, Jira, GitHubを習得できます',
+    end_at: Time.current + 1.week,
+  },
+])
