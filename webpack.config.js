@@ -15,6 +15,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js)$/,
+        loaders: 'babel-loader',
+        query: {
+          presets: ['react', 'env'],
+        }
+      },
+      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,

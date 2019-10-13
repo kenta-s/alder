@@ -7,10 +7,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_bundle_tag 'applicationStyle' %>
-    <%= javascript_bundle_tag 'application' %>
   </head>
 
   <body>
-    <div id="root"></div>
+    <%= yield %>
   </body>
 </html>
