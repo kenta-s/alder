@@ -5,8 +5,14 @@
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
+    "mini-css-extract-plugin": "^0.8.0",
     "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-manifest-plugin": "^2.2.0"
+  },
+  "scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack --mode=development"
   },
   "version": "0.1.0"
 }
