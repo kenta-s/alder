@@ -9,13 +9,15 @@ class Tasks extends React.Component {
     this.props.fetchTasks()
   }
   render(){
+	  const tasks = this.props.tasks.map(task => {
+		  return <li key={task.id}>{task.title}</li>
+		})
     return(
-      <div>
-        you will see some tasks here
-      </div>
+      <ul>
+			  {tasks}
+      </ul>
     )
   }
-
 }
 
 const mapStateToProps = state => {

@@ -12,15 +12,21 @@ import { ConnectedRouter } from 'connected-react-router'
 
 import { Provider } from 'react-redux'
 import store, { history } from "./redux/store";
+import Header from './components/Header'
+import Sidebar from './components/Sidebar'
 import Tasks from './components/Tasks'
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path="/tasks" component={Tasks} />
-      </Switch>
+      <Header />
+      <Sidebar />
+      <div className="main">
+        <Switch>
+          <Route exact path="/tasks" component={Tasks} />
+        </Switch>
+      </div>
     </ConnectedRouter>
   </Provider>,
   rootElement
