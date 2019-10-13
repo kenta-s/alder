@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :tasks, only: [:index, :show]
+
   namespace :api, { format: 'json' } do
     namespace :v1 do
       resources :tasks, only: [:index, :show]
