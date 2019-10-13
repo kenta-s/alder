@@ -10,5 +10,6 @@ class TaskApplication < ApplicationRecord
 
   validates :status, presence: true
   delegate :title, to: :task, prefix: true
+  delegate :description, to: :task, prefix: true
   delegate :end_at, to: :task, prefix: true
 end
