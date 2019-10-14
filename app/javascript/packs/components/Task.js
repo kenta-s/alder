@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import {
   fetchTasks,
 } from "../redux/actions/tasks"
+import { flashMessage } from 'redux-flash'
 import TaskApplyModal from './TaskApplyModal'
 
 class Task extends React.Component {
@@ -15,7 +16,6 @@ class Task extends React.Component {
     };
   }
 	applyForTask = (id) => {
-	console.log(id)
 	}
   componentDidMount() {
     this.props.fetchTasks()
@@ -31,7 +31,7 @@ class Task extends React.Component {
         {task && <h3>{task.title}</h3>}
         {task && <p>詳細: {task.description}</p>}
         {task && <p>応募期限: {task.end_at}</p>}
-				{task && <TaskApplyModal task={task} applyForTask={this.applyForTask} />}
+				{task && <TaskApplyModal task={task} applyForTask={this.applyForTask} flashMessage={this.props.flashMessage} />}
       </div>
     )
   }
@@ -46,6 +46,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchTasks: () => dispatch(fetchTasks()),
+		flashMessage: (message, isError) => dispatch(flashMessage(message, isError)),
   }
 }
 

@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function TaskApplyModal({task, applyForTask}) {
+export default function TaskApplyModal({task, applyForTask, flashMessage}) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -46,6 +46,7 @@ export default function TaskApplyModal({task, applyForTask}) {
   const apply = () => {
     applyForTask(task.id)
     setOpen(false)
+		flashMessage('応募しました。連絡をお待ちください。', false)
   }
 
   return (
