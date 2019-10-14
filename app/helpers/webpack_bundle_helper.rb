@@ -35,6 +35,6 @@ module WebpackBundleHelper
 
   def manifest
     return @manifest if @manifest
-    @manifest ||= JSON.parse(File.read(Rails.root.join('public', 'packs', 'manifest.json')))
+    @manifest ||= JSON.parse(File.read(Rails.public_path.join('packs', 'manifest.json')))
   end
 end
