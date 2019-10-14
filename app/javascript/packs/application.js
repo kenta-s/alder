@@ -17,12 +17,14 @@ import Sidebar from './components/Sidebar'
 import Tasks from './components/Tasks'
 import Task from './components/Task'
 import App from './components/App'
+import FlashMessages from './components/FlashMessages'
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
 		  <App goToTasks={() => history.push(`/tasks`)} />
+			<FlashMessages />
     </ConnectedRouter>
   </Provider>,
   rootElement
