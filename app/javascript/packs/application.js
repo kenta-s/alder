@@ -15,6 +15,7 @@ import store, { history } from "./redux/store";
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Tasks from './components/Tasks'
+import Task from './components/Task'
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(
@@ -25,6 +26,7 @@ ReactDOM.render(
       <div className="main">
         <Switch>
           <Route exact path="/tasks" component={Tasks} />
+          <Route exact path="/tasks/:id" component={Task} />
         </Switch>
       </div>
     </ConnectedRouter>

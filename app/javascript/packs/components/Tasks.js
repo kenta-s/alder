@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux"
+import { withRouter } from 'react-router'
 import {
   fetchTasks,
 } from "../redux/actions/tasks"
@@ -10,9 +11,8 @@ class Tasks extends React.Component {
   }
   render(){
 	  const tasks = this.props.tasks.map(task => {
-		  // return <li key={task.id}>{task.title}</li>
 		  return(
-        <tr>
+        <tr key={task.id} style={{cursor: 'pointer'}} onClick={() => this.props.history.push(`/tasks/${task.id}`)}>
           <td>{task.title}</td>
           <td>{task.end_at}</td>
         </tr>
@@ -46,7 +46,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps 
-)(Tasks);
+)(Tasks));
