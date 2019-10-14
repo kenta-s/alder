@@ -36,8 +36,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development",
-    "heroku-postbuild": "yarn build",
-    "start": ""
+    "heroku-postbuild": "yarn build"
   },
   "version": "0.1.0"
 }
