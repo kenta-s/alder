@@ -1,21 +1,16 @@
 import React from "react";
 import { connect } from "react-redux"
+import { withRouter } from 'react-router'
 import {SideNav, SideNavItem, Button} from 'react-materialize'
 
 class Sidebar extends React.Component {
   render(){
     return(
-      <ul className="sidenav sidenav-fixed" style={{marginTop: '64px', zIndex:'-1'}}>
-        <li>
-          aaa
-        </li>
-        <li>
-          aaa
-        </li>
-        <li>
-          aaa
-        </li>
-      </ul>
+        <div className="collection sidenav sidenav-fixed" style={{marginTop: '67px'}}>
+          <a href="#!" className="collection-item" onClick={() => this.props.history.push(`/tasks`)} >
+            タスク一覧
+          </a>
+        </div>
     )
   }
 }
@@ -30,7 +25,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps 
-)(Sidebar);
+)(Sidebar))
