@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux"
 import { withRouter } from 'react-router'
-import {SideNav, SideNavItem, Button} from 'react-materialize'
+// import {SideNav, SideNavItem, Button} from 'react-materialize'
 
 class Sidebar extends React.Component {
   render(){

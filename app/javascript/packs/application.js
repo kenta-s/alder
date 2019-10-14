@@ -16,19 +16,13 @@ import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Tasks from './components/Tasks'
 import Task from './components/Task'
+import App from './components/App'
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Header />
-      <Sidebar />
-      <div className="main">
-        <Switch>
-          <Route exact path="/tasks" component={Tasks} />
-          <Route exact path="/tasks/:id" component={Task} />
-        </Switch>
-      </div>
+		  <App goToTasks={() => history.push(`/tasks`)} />
     </ConnectedRouter>
   </Provider>,
   rootElement

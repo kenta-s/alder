@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux"
-import { Button } from "react-materialize"
+// import { Button, Modal } from "react-materialize"
 import {
   fetchTasks,
 } from "../redux/actions/tasks"
+import TaskApplyModal from './TaskApplyModal'
 
 class Task extends React.Component {
   constructor(props) {
@@ -13,6 +14,9 @@ class Task extends React.Component {
       task: null,
     };
   }
+	applyForTask = (id) => {
+	console.log(id)
+	}
   componentDidMount() {
     this.props.fetchTasks()
       .then(response => {
@@ -27,7 +31,7 @@ class Task extends React.Component {
         {task && <h3>{task.title}</h3>}
         {task && <p>詳細: {task.description}</p>}
         {task && <p>応募期限: {task.end_at}</p>}
-        <Button>やってみる</Button>
+				{task && <TaskApplyModal task={task} applyForTask={this.applyForTask} />}
       </div>
     )
   }
