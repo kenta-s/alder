@@ -8,7 +8,7 @@ class Sidebar extends React.Component {
     return(
         <div className="collection sidenav sidenav-fixed" style={{marginTop: '67px'}}>
           <a href="#!" className="collection-item" onClick={() => this.props.history.push(`/tasks`)} >
-            タスク一覧
+            募集中のタスク
           </a>
         </div>
     )
