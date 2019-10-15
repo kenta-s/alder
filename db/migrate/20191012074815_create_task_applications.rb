@@ -7,5 +7,7 @@ class CreateTaskApplications < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :task_applications, [:user_id, :task_id], unique: true
   end
 end

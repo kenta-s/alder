@@ -12,4 +12,6 @@ class TaskApplication < ApplicationRecord
   delegate :title, to: :task, prefix: true
   delegate :description, to: :task, prefix: true
   delegate :end_at, to: :task, prefix: true
+
+  validates :task, uniqueness: {scope: :user_id}
 end

@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_074815) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["task_id"], name: "index_task_applications_on_task_id"
+    t.index ["user_id", "task_id"], name: "index_task_applications_on_user_id_and_task_id", unique: true
     t.index ["user_id"], name: "index_task_applications_on_user_id"
   end
 
