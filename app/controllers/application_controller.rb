@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  layout :layout_by_resource
+  # layout :layout_by_resource
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def layout_by_resource
-    if devise_controller?
-      "devise"
-    else
-      "application"
-    end
-  end
+  # def layout_by_resource
+  #   if devise_controller?
+  #     "devise"
+  #   else
+  #     "application"
+  #   end
+  # end
 
   def after_sign_in_path_for(resource)
     tasks_path

@@ -29,6 +29,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 // import Orders from './Orders';
 import Tasks from './Tasks'
 import Task from './Task'
+import UserSignIn from './UserSignIn'
 
 function Copyright() {
   return (
@@ -196,6 +197,7 @@ export default function App({goToTasks}) {
                 <Switch>
                   <Route exact path="/tasks" component={Tasks} />
                   <Route exact path="/tasks/:id" component={Task} />
+                  <Route exact path="/users/sign_in" component={UserSignIn} />
                 </Switch>
               </Paper>
             </Grid>
