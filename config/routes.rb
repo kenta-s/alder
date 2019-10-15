@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.admin? } do
+    namespace :admin do
+      resources :users
+      resources :tasks
+      resources :task_applications
+
+      root to: "users#index"
+    end
+  end
   devise_for :users
 
   resources :tasks, only: [:index, :show]

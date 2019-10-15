@@ -9,4 +9,10 @@ class User < ApplicationRecord
   validates :display_name, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :task_applications, dependent: :destroy
+
+  enum status: {
+    apprentice: 0,
+    professional: 10,
+    admin: 42,
+  }
 end

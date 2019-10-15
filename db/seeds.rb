@@ -8,16 +8,25 @@
 
 User.create([
   {
+    display_name: 'admin',
+    email: 'admin@example.com',
+    password: 'aaaaaa',
+    confirmed_at: Time.now,
+    status: :admin,
+  },
+  {
     display_name: 'user1',
     email: 'user1@example.com',
     password: 'aaaaaa',
     confirmed_at: Time.now,
+    status: :professional,
   },
   {
     display_name: 'user2',
     email: 'user2@example.com',
     password: 'aaaaaa',
     confirmed_at: Time.now,
+    status: :apprentice,
   }
 ])
 
