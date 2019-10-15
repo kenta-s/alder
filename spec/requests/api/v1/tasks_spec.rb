@@ -2,11 +2,14 @@ require 'rails_helper'
 
 describe Api::V1::TasksController, type: :request do
   describe '#index' do
+    let(:user) { FactoryBot.create(:user) }
+
     before do
       FactoryBot.create_list(:task, 10)
     end
 
     it 'should return 10 tasks' do
+      sign_in user
       get '/api/v1/tasks'
       json = JSON.parse(response.body)
 
@@ -16,9 +19,11 @@ describe Api::V1::TasksController, type: :request do
   end
 
   describe '#show' do
+    let(:user) { FactoryBot.create(:user) }
     let(:task) { FactoryBot.create(:task, title: 'foo', description: 'bar', end_at: Time.zone.local(2019, 10, 1, 9, 0)) }
 
     it 'should return a task' do
+      sign_in user
       get "/api/v1/tasks/#{task.id}"
       json = JSON.parse(response.body)
 

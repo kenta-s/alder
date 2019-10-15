@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: "landing#index"
+
   authenticate :user, lambda { |u| u.admin? } do
     namespace :admin do
       resources :users

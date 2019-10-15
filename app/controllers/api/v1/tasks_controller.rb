@@ -1,4 +1,6 @@
 class Api::V1::TasksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     render json: Task.all
   end

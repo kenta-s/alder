@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_10_12_074815) do
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title", limit: 191, null: false
     t.text "description", null: false
     t.datetime "end_at", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -31,19 +31,19 @@ ActiveRecord::Schema.define(version: 2019_10_12_074815) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "email", limit: 191, default: "", null: false
+    t.string "encrypted_password", limit: 191, default: "", null: false
+    t.string "reset_password_token", limit: 191
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "confirmation_token"
+    t.string "confirmation_token", limit: 191
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
+    t.string "unconfirmed_email", limit: 191
     t.integer "failed_attempts", default: 0, null: false
-    t.string "unlock_token"
+    t.string "unlock_token", limit: 191
     t.datetime "locked_at"
-    t.string "display_name", null: false
+    t.string "display_name", limit: 191, null: false
     t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

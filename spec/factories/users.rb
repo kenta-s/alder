@@ -7,6 +7,7 @@ FactoryBot.define do
       "foo#{n}"
     end
     password { 'abcdefg1' }
+    status { :apprentice }
     confirmed_at { Time.zone.local(2019, 9, 1, 10, 30) }
   end
 end
