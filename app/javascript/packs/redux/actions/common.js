@@ -1,4 +1,5 @@
 import { 
+  SET_CSRFTOKEN,
   LOADING_START,
   LOADING_FINISH,
 } from '../actionTypes'
@@ -12,3 +13,15 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
   type: LOADING_FINISH
 })
+
+export const setCsrftoken = (token) => ({
+  type: SET_CSRFTOKEN,
+  token,
+})
+
+export function getCsrftoken() {
+  return dispatch => {
+    const token = document.getElementById('authenticity_token').getAttribute('value');
+    dispatch(setCsrftoken(token))
+  }
+}

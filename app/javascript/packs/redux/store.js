@@ -10,6 +10,8 @@ const loggerMiddleware = createLogger()
 export const history = createBrowserHistory();
 const flashOptions = { timeout: 3000 }
 
+import { getCsrftoken } from "./actions/common";
+
 const store = createStore(
   createRootReducer(history),
   compose(
@@ -21,4 +23,7 @@ const store = createStore(
     )
   )
 );
+
+store.dispatch(getCsrftoken())
+
 export default store

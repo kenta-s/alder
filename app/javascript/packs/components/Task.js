@@ -5,8 +5,8 @@ import {
 } from "../redux/actions/tasks"
 import {
   fetchTaskApplications,
+  createTaskApplication,
 } from "../redux/actions/taskApplications"
-import { flashMessage } from 'redux-flash'
 import TaskApplyModal from './TaskApplyModal'
 import Button from '@material-ui/core/Button';
 
@@ -19,6 +19,7 @@ class Task extends React.Component {
     };
   }
 	applyForTask = (id) => {
+    this.props.createTaskApplication(this.props.csrftoken, id)
 	}
   componentDidMount() {
     this.props.fetchTasks()
@@ -44,7 +45,7 @@ class Task extends React.Component {
             </div>
             :
 				    <div>
-              {task && <TaskApplyModal task={task} applyForTask={this.applyForTask} flashMessage={this.props.flashMessage} />}
+              {task && <TaskApplyModal task={task} applyForTask={this.applyForTask} />}
 				    </div>
         }
       </div>
@@ -56,6 +57,7 @@ const mapStateToProps = state => {
   return { 
     tasks: state.tasks.data,
     taskApplications: state.taskApplications.data,
+    csrftoken: state.csrftoken.token,
   }
 };
 
@@ -63,7 +65,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchTasks: () => dispatch(fetchTasks()),
     fetchTaskApplications: () => dispatch(fetchTaskApplications()),
-		flashMessage: (message, isError) => dispatch(flashMessage(message, isError)),
+    createTaskApplication: (csrftoken, id) => dispatch(createTaskApplication(csrftoken, id)),
   }
 }
 
