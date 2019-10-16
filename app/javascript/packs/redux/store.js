@@ -5,12 +5,12 @@ import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
 import { middleware as flashMiddleware } from 'redux-flash'
 import { createLogger } from "redux-logger";
+import { getCsrftoken } from "./actions/common";
+import { verifyCredentials } from '../redux-token-auth-config'
 
 const loggerMiddleware = createLogger()
 export const history = createBrowserHistory();
 const flashOptions = { timeout: 3000 }
-
-import { getCsrftoken } from "./actions/common";
 
 const store = createStore(
   createRootReducer(history),
@@ -24,6 +24,7 @@ const store = createStore(
   )
 );
 
+verifyCredentials(store)
 store.dispatch(getCsrftoken())
 
 export default store
