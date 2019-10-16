@@ -24,25 +24,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
-
 export default function TextFields() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -58,11 +39,17 @@ export default function TextFields() {
     const csrftoken = document.getElementById('authenticity_token').getAttribute('value');
     axios.defaults.headers.common['X-CSRF-Token'] = csrftoken
     // TODO: redirect to /tasks
-    return axios.post(`/users/sign_in`, {
+    axios.post(`/users/sign_in`, {
       user: {
         email: values.email,
         password: values.password,
       }
+    })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.error(error)
     })
   }
 
