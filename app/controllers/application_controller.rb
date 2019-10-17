@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+        include DeviseTokenAuth::Concerns::SetUserByToken
   # layout :layout_by_resource
   before_action :configure_permitted_parameters, if: :devise_controller?
 

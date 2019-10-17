@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :display_name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :task_applications, dependent: :destroy
 

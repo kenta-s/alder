@@ -8,21 +8,24 @@
 
 User.create([
   {
-    display_name: 'admin',
+    name: 'admin',
+    uid: 'aaa',
     email: 'admin@example.com',
     password: 'aaaaaa',
     confirmed_at: Time.now,
     status: :admin,
   },
   {
-    display_name: 'user1',
+    name: 'user1',
+    uid: 'bbb',
     email: 'user1@example.com',
     password: 'aaaaaa',
     confirmed_at: Time.now,
     status: :professional,
   },
   {
-    display_name: 'user2',
+    name: 'user2',
+    uid: 'ccc',
     email: 'user2@example.com',
     password: 'aaaaaa',
     confirmed_at: Time.now,

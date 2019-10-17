@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
   root to: "landing#index"
 
   authenticate :user, lambda { |u| u.admin? } do
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
       root to: "users#index"
     end
   end
-  devise_for :users
+  # devise_for :users
 
   resources :tasks, only: [:index, :show]
 
