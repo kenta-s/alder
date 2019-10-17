@@ -197,7 +197,7 @@ export default function App({goToTasks}) {
                 <Switch>
                   <Route exact path="/tasks" component={Tasks} />
                   <Route exact path="/tasks/:id" component={Task} />
-                  <Route exact path="/users/sign_in" component={UserSignIn} />
+                  <Route exact path="/signin" component={UserSignIn} />
                 </Switch>
               </Paper>
             </Grid>

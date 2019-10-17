@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable
 
+  include DeviseTokenAuth::Concerns::User
+
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 

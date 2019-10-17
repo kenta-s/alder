@@ -3,7 +3,7 @@ import { generateAuthActions } from 'redux-token-auth'
 
 const config = {
   // authUrl,
-  authUrl: '/users',
+  authUrl: '/auth',
   userAttributes: {
     firstName: 'first_name',
     imageUrl: 'image',

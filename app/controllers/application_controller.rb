@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-        include DeviseTokenAuth::Concerns::SetUserByToken
+  include DeviseTokenAuth::Concerns::SetUserByToken
   # layout :layout_by_resource
+  protect_from_forgery unless: -> { request.format.json? }
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
