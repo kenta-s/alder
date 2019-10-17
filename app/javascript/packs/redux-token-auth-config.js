@@ -5,8 +5,8 @@ const config = {
   // authUrl,
   authUrl: '/auth',
   userAttributes: {
-    firstName: 'first_name',
-    imageUrl: 'image',
+    name: 'name',
+    nickname: 'nickname',
   },
   userRegistrationAttributes: {
     firstName: 'first_name',

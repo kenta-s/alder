@@ -20,10 +20,23 @@ const addTaskApplication = payload => ({
   payload,
 })
 
+const getStorage = () => {
+ return window.localStorage
+}
+
 export function fetchTaskApplications() {
+  const instance = axios.create({
+    headers: {
+      "access-token": getStorage()['access-token'],
+      "token-type":   "Bearer",
+      "client":       getStorage()['client'],
+      "expiry":       getStorage()['expiry'],
+      "uid":          getStorage()['uid']
+    }
+  })
   return dispatch => {
     dispatch(startLoading())
-    return axios(`/api/v1/task_applications`)
+    return instance.get(`/api/v1/task_applications`)
       .then(response => {
         dispatch(receiveData(response.data))
         return response
@@ -39,10 +52,19 @@ export function fetchTaskApplications() {
 }
 
 export function createTaskApplication(csrftoken, taskId) {
+  const instance = axios.create({
+    headers: {
+      "access-token": getStorage()['access-token'],
+      "token-type":   "Bearer",
+      "client":       getStorage()['client'],
+      "expiry":       getStorage()['expiry'],
+      "uid":          getStorage()['uid']
+    }
+  })
   axios.defaults.headers.common['X-CSRF-Token'] = csrftoken
   return dispatch => {
     dispatch(startLoading())
-    return axios.post(`/api/v1/task_applications/`, {
+    return instance.post(`/api/v1/task_applications/`, {
       task_application: {
         task_id: taskId
       }

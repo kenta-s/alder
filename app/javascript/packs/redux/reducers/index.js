@@ -7,10 +7,10 @@ import taskApplications from './taskApplications'
 import csrftoken from './csrftoken'
 
 export default (history) => combineReducers({ 
+  reduxTokenAuth: reduxTokenAuthReducer,
   router: connectRouter(history),
   flash: flashReducer,
   tasks,
   taskApplications,
   csrftoken,
-  reduxTokenAuth: reduxTokenAuthReducer,
 });

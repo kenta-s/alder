@@ -25,3 +25,13 @@ export function getCsrftoken() {
     dispatch(setCsrftoken(token))
   }
 }
+
+// export const instance = axios.create({
+//   headers: {
+//     "access-token": window.localStorage['access-token'],
+//     "token-type":   "Bearer",
+//     "client":       window.localStorage['client'],
+//     "expiry":       window.localStorage['expiry'],
+//     "uid":          window.localStorage['uid']
+//   }
+// })

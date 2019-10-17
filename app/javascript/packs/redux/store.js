@@ -25,6 +25,6 @@ const store = createStore(
 );
 
 verifyCredentials(store)
-store.dispatch(getCsrftoken())
+// store.dispatch(getCsrftoken())
 
 export default store

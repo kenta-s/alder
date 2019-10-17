@@ -34,6 +34,9 @@
     "webpack-cli": "^3.3.9",
     "webpack-manifest-plugin": "^2.2.0"
   },
+  "resolutions": {
+    "react-redux": "^7.1.1"
+  },
   "scripts": {
     "build": "webpack --mode=production",
     "dev": "webpack --mode=development",
