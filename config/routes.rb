@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:index, :show]
   resources :signin, only: [:index]
+  resources :signup, only: [:index]
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
