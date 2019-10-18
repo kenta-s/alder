@@ -9,7 +9,10 @@ const config = {
     nickname: 'nickname',
   },
   userRegistrationAttributes: {
-    firstName: 'first_name',
+    email: 'email',
+    password: 'password',
+    passwordConfirmation: 'password_confirmation',
+    userStatus: 'status',
   },
 }
 

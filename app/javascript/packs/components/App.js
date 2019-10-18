@@ -30,6 +30,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Tasks from './Tasks'
 import Task from './Task'
 import UserSignIn from './UserSignIn'
+import UserSignUp from './UserSignUp'
 import { generateRequireSignInWrapper } from 'redux-token-auth'
 
 const requireSignIn = generateRequireSignInWrapper({
@@ -203,6 +204,7 @@ export default function App({goToTasks}) {
                   <Route exact path="/tasks" component={requireSignIn(Tasks)} />
                   <Route exact path="/tasks/:id" component={Task} />
                   <Route exact path="/signin" component={UserSignIn} />
+                  <Route exact path="/signup" component={UserSignUp} />
                 </Switch>
               </Paper>
             </Grid>
