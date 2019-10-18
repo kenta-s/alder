@@ -34,6 +34,7 @@ const UserSignUp = (props) => {
   const { registerUser } = props
   const classes = useStyles();
   const [values, setValues] = React.useState({
+    name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
@@ -49,12 +50,27 @@ const UserSignUp = (props) => {
   };
 
   const signUp = () => {
-    registerUser(values)
+    // registerUser(values)
+    registerUser({ email: values.email, name: values.name, password: values.password, status: values.userStatus })
+      .then(response => {
+        console.log('aaaaaaaaaaa')
+      })
+      .catch(error => {
+        console.error(error)
+        console.error('bbbbbbbbb')
+      })
   }
 
   return (
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
+        <TextField
+          label="user ID"
+          fullWidth
+          margin="normal"
+          onChange={handleChange('name')}
+          value={values.name}
+        />
         <TextField
           label="Email or UserID"
           fullWidth
@@ -101,5 +117,5 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   null,
-  mapDispatchToProps
+  { registerUser } 
 )(UserSignUp);
