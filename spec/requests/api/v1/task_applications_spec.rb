@@ -1,6 +1,28 @@
 require 'rails_helper'
+include ActionController::RespondWith
 
 describe Api::V1::TaskApplicationsController, type: :request do
+  def login
+    post user_session_path, params:  { email: user.email, password: 'abcdefg1' }.to_json, headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+  end
+
+  def get_auth_params_from_login_response_headers(response)
+    client = response.headers['client']
+    token = response.headers['access-token']
+    expiry = response.headers['expiry']
+    token_type = response.headers['token-type']
+    uid = response.headers['uid']
+
+    auth_params = {
+      'access-token' => token,
+      'client' => client,
+      'uid' => uid,
+      'expiry' => expiry,
+      'token_type' => token_type
+    }
+    auth_params
+  end
+
   describe '#index' do
     let(:user1) { FactoryBot.create(:user) }
     let(:user2) { FactoryBot.create(:user) }
@@ -11,8 +33,10 @@ describe Api::V1::TaskApplicationsController, type: :request do
     context 'when current_user is user1' do
       let(:user) { user1 }
       it 'should return 3 tasks' do
-        sign_in user
-        get "/api/v1/task_applications"
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+
+        get "/api/v1/task_applications", headers: auth_params
         json = JSON.parse(response.body)
 
         expect(response.status).to eq(200)
@@ -26,8 +50,9 @@ describe Api::V1::TaskApplicationsController, type: :request do
     context 'when current_user is user2' do
       let(:user) { user2 }
       it 'should return no tasks' do
-        sign_in user
-        get "/api/v1/task_applications"
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+        get "/api/v1/task_applications", headers: auth_params
         json = JSON.parse(response.body)
 
         expect(response.status).to eq(200)
@@ -46,8 +71,9 @@ describe Api::V1::TaskApplicationsController, type: :request do
     end
 
     it 'should return a task' do
-      sign_in user
-      get "/api/v1/task_applications/#{task_application.id}"
+      login
+      auth_params = get_auth_params_from_login_response_headers(response)
+      get "/api/v1/task_applications/#{task_application.id}", headers: auth_params
       json = JSON.parse(response.body)
    
       expect(response.status).to eq(200)
@@ -63,8 +89,9 @@ describe Api::V1::TaskApplicationsController, type: :request do
 
     context "when valid task_id is given" do
       it 'should return a task' do
-        sign_in user
-        expect{ post "/api/v1/task_applications/", params: {task_application: {task_id: task.id}} }.to change {user.task_applications.count}.by(1)
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+        expect{ post "/api/v1/task_applications/", headers: auth_params, params: {task_application: {task_id: task.id}} }.to change {user.task_applications.count}.by(1)
         
         json = JSON.parse(response.body)
    
@@ -88,8 +115,10 @@ describe Api::V1::TaskApplicationsController, type: :request do
     context "when user tries to delete his task_application" do
       let(:user) { user1 }
       it 'should delete task_application' do
-        sign_in user
-        expect{ delete "/api/v1/task_applications/#{task_application.id}" }.to change {user.task_applications.count}.by(-1)
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+
+        expect{ delete "/api/v1/task_applications/#{task_application.id}", headers: auth_params }.to change {user.task_applications.count}.by(-1)
         expect(response.status).to eq(204)
         expect{ task_application.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end
@@ -98,8 +127,9 @@ describe Api::V1::TaskApplicationsController, type: :request do
     context "when user tries to delete another user's task_application" do
       let(:user) { user2 }
       it 'should not delete task_application' do
-        sign_in user
-        expect{ delete "/api/v1/task_applications/#{task_application.id}" }.to raise_error(ActiveRecord::RecordNotFound)
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+        expect{ delete "/api/v1/task_applications/#{task_application.id}", headers: auth_params }.to raise_error(ActiveRecord::RecordNotFound)
         expect{ task_application.reload }.not_to raise_error
       end
     end
