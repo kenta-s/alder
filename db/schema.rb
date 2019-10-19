@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2019_10_19_065405) do
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "sender_id", null: false
     t.bigint "recipient_id", null: false
+    t.datetime "read_at"
     t.text "content", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -11,12 +11,14 @@ Rails.application.routes.draw do
       root to: "users#index"
     end
   end
-  # devise_for :users
 
   resources :tasks, only: [:index, :show]
   resources :signin, only: [:index]
   resources :signup, only: [:index]
   resources :thankyou, only: [:index]
+  resources :users, param: :name do
+    resources :messages, only: [:index, :show], controller: 'users/messages'
+  end
 
   namespace :api, { format: 'json' } do
     namespace :v1 do
