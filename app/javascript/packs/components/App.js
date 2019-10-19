@@ -195,7 +195,7 @@ export default function App({goToTasks, history}) {
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
-              <ListItemText primary="受信メッセージ" />
+              <ListItemText primary="メッセージ" />
             </ListItem>
           </div>
         </List>
