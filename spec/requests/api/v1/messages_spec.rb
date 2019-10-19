@@ -161,4 +161,23 @@ describe Api::V1::TaskApplicationsController, type: :request do
 
     end
   end
+
+  describe '#create' do
+    let(:user1) { FactoryBot.create(:user) }
+    let(:user2) { FactoryBot.create(:user) }
+
+    context "when user1 sends a message to user2" do
+      let(:user) { user1 }
+      it 'should create a new message' do
+        login
+        auth_params = get_auth_params_from_login_response_headers(response)
+        expect{ post "/api/v1/messages/", headers: auth_params, params: {message: {recipient_id: user2.id, content: 'this is a pen'}} }.to change {user2.got_messages.count}.by(1).and change {user1.sent_messages.count}.by(1)
+        
+        json = JSON.parse(response.body)
+   
+        expect(response.status).to eq(201)
+        expect(json['content']).to eq('this is a pen')
+      end
+    end
+  end
 end

@@ -36,10 +36,6 @@ Rails.application.routes.draw do
           get :inbox
           get :outbox
         end
-
-        member do
-          get :show
-        end
       end
     end
   end
