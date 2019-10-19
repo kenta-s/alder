@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -132,7 +133,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function App({goToTasks}) {
+export default function App({goToTasks, history}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -157,8 +158,8 @@ export default function App({goToTasks}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} onClick={() => { history.push('/')}}>
+            Proprogramming
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

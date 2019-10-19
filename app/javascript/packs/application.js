@@ -23,7 +23,7 @@ const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-		  <App goToTasks={() => history.push(`/tasks`)} />
+		  <App goToTasks={() => history.push(`/tasks`)} history={history} />
 			<FlashMessages />
     </ConnectedRouter>
   </Provider>,
