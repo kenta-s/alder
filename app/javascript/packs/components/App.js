@@ -31,6 +31,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import Tasks from './Tasks'
 import Task from './Task'
 import MessageCounts from './MessageCounts'
+import Messages from './Messages'
 import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
 import Thankyou from './Thankyou'
@@ -206,13 +207,12 @@ export default function App({goToTasks, history}) {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Switch>
                   <Route exact path="/tasks" component={requireSignIn(Tasks)} />
                   <Route exact path="/tasks/:id" component={requireSignIn(Task)} />
-                  <Route exact path="/users/:name/messages" component={requireSignIn(MessageCounts)} />
+                  <Route exact path="/users/:name/messages" component={requireSignIn(Messages)} />
                   <Route exact path="/messages" component={requireSignIn(MessageCounts)} />
                   <Route exact path="/signin" component={UserSignIn} />
                   <Route exact path="/signup" component={UserSignUp} />

@@ -1,15 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux"
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  fetchMessageCounts,
-} from "../redux/actions/messageCounts"
+  fetchMessages,
+} from "../redux/actions/messages"
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import Title from './Title';
 
 const useStyles = makeStyles({
@@ -20,30 +21,21 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-  row: {
-    cursor: 'pointer',
-  }
 });
 
-// function createData(name, unreadCount) {
-//   return { name, unreadCount };
-// }
-// 
-// const rows = [
-//   createData('Frozen yoghurt', 0),
-//   createData('Ice cream sandwich', 0),
-//   createData('Eclair', 0),
-//   createData('Cupcake', 0),
-//   createData('Gingerbread', 0),
-// ];
-
-function MessageCounts({messageCounts, fetchMessageCounts, history}) {
+function Messages({messages, fetchMessages}) {
   const classes = useStyles();
   useEffect(() => {
-    fetchMessageCounts()
+    fetchMessages()
   }, [])
 
-  const rows = messageCounts
+  const [newMessage, setNewMessage] = useState('')
+  const rows = messages
+  const sendMessage = () => {
+    console.log('called')
+    console.log(newMessage)
+    setNewMessage('')
+  }
 
   return (
     <React.Fragment>
@@ -51,38 +43,51 @@ function MessageCounts({messageCounts, fetchMessageCounts, history}) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>name</TableCell>
-            <TableCell align="right">unread</TableCell>
+            <TableCell>content</TableCell>
+            <TableCell align="right">sent at</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.name} className={classes.row} onClick={() => { history.push(`/users/${row.name}/messages`) }}>
+            <TableRow key={row.id}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.content}
               </TableCell>
-              <TableCell align="right">{row.unreadCount}</TableCell>
+              <TableCell align="right">{row.sentAt}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      <TextField
+        label="message"
+        fullWidth
+        margin="normal"
+        onChange={(e) => { setNewMessage(e.target.value) }}
+        value={newMessage}
+        multiline
+        variant="outlined"
+      />
+      <Button variant="contained" color="primary" onClick={sendMessage} disabled={newMessage === ''}>
+        送信
+      </Button>
     </React.Fragment>
   );
 }
 
 const mapStateToProps = state => {
   return { 
-    messageCounts: state.messageCounts.data,
+    messages: state.messages.data,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMessageCounts: () => dispatch(fetchMessageCounts()),
+    fetchMessages: () => dispatch(fetchMessages()),
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps 
-)(MessageCounts);
+)(Messages);

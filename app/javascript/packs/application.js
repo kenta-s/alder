@@ -19,13 +19,18 @@ import Task from './components/Task'
 import App from './components/App'
 import FlashMessages from './components/FlashMessages'
 
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { theme } from './theme';
+
 const rootElement = document.getElementById('root')
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-		  <App goToTasks={() => history.push(`/tasks`)} history={history} />
-			<FlashMessages />
-    </ConnectedRouter>
+    <MuiThemeProvider theme={theme} >
+      <ConnectedRouter history={history}>
+		    <App goToTasks={() => history.push(`/tasks`)} history={history} />
+		  	<FlashMessages />
+      </ConnectedRouter>
+    </MuiThemeProvider>
   </Provider>,
   rootElement
 )

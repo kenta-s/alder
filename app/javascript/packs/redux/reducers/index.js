@@ -5,6 +5,7 @@ import { reduxTokenAuthReducer } from 'redux-token-auth'
 import tasks from './tasks'
 import taskApplications from './taskApplications'
 import messageCounts from './messageCounts'
+import messages from './messages'
 import csrftoken from './csrftoken'
 
 export default (history) => combineReducers({ 
@@ -14,5 +15,6 @@ export default (history) => combineReducers({
   tasks,
   taskApplications,
   messageCounts,
+  messages,
   csrftoken,
 });
