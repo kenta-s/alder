@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :task_applications, dependent: :destroy
+  has_many :sent_messages, class_name: :Message, foreign_key: :sender_id, dependent: :destroy
+  has_many :got_messages, class_name: :Message, foreign_key: :recipient_id, dependent: :destroy
 
   enum status: {
     apprentice: 0,
