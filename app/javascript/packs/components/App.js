@@ -30,6 +30,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 // import Orders from './Orders';
 import Tasks from './Tasks'
 import Task from './Task'
+import MessageInbox from './MessageInbox'
 import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
 import Thankyou from './Thankyou'
@@ -190,6 +191,12 @@ export default function App({goToTasks, history}) {
               </ListItemIcon>
               <ListItemText primary="募集中のタスク" />
             </ListItem>
+            <ListItem button onClick={() => {history.push('/messages/inbox')}}>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="受信メッセージ" />
+            </ListItem>
           </div>
         </List>
         { /* <Divider />
@@ -204,7 +211,8 @@ export default function App({goToTasks, history}) {
               <Paper className={classes.paper}>
                 <Switch>
                   <Route exact path="/tasks" component={requireSignIn(Tasks)} />
-                  <Route exact path="/tasks/:id" component={Task} />
+                  <Route exact path="/tasks/:id" component={requireSignIn(Task)} />
+                  <Route exact path="/messages/inbox" component={requireSignIn(MessageInbox)} />
                   <Route exact path="/signin" component={UserSignIn} />
                   <Route exact path="/signup" component={UserSignUp} />
                   <Route exact path="/thankyou" component={Thankyou} />
