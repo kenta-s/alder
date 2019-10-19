@@ -16,8 +16,15 @@ Rails.application.routes.draw do
   resources :signin, only: [:index]
   resources :signup, only: [:index]
   resources :thankyou, only: [:index]
-  resources :users, param: :name do
-    resources :messages, only: [:index, :show], controller: 'users/messages'
+  resources :messages do
+    collection do
+      get :inbox
+      get :outbox
+    end
+
+    member do
+      get :show
+    end
   end
 
   namespace :api, { format: 'json' } do
