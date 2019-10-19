@@ -157,10 +157,6 @@ describe Api::V1::TaskApplicationsController, type: :request do
         expect{
           get "/api/v1/messages/#{message1.id}", headers: auth_params
         }.to raise_error(ActiveRecord::RecordNotFound)
-        # json = JSON.parse(response.body)
-
-        # expect(response.status).to eq(200)
-        # expect(json.dig('content')).to eq('this is a message3')
       end
 
     end
