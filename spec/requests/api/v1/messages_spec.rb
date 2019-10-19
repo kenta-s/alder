@@ -1,7 +1,7 @@
 require 'rails_helper'
 include ActionController::RespondWith
 
-describe Api::V1::TaskApplicationsController, type: :request do
+describe Api::V1::MessagesController, type: :request do
   describe '#index' do
     let(:user1) { FactoryBot.create(:user) }
     let(:user2) { FactoryBot.create(:user) }

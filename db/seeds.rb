@@ -50,3 +50,38 @@ Task.create([
     end_at: Time.current + 1.week,
   },
 ])
+
+user1 = User.first
+user2 = User.second
+Message.create([
+  {
+    sender: user1,
+    recipient: user2,
+    content: 'こんにちは',
+    read_at: Time.zone.local(2019, 10, 3, 10, 30),
+  },
+  {
+    sender: user1,
+    recipient: user2,
+    content: '今日はカレーを食べました',
+    read_at: Time.zone.local(2019, 10, 4, 10, 30),
+  },
+  {
+    sender: user1,
+    recipient: user2,
+    content: '元気ですか',
+    read_at: Time.zone.local(2019, 10, 4, 11, 30),
+  },
+  {
+    sender: user2,
+    recipient: user1,
+    content: 'カレーうどんもいいですよ',
+    read_at: Time.zone.local(2019, 10, 4, 10, 25),
+  },
+  {
+    sender: user2,
+    recipient: user1,
+    content: 'おやすみなさい',
+    read_at: nil,
+  },
+])

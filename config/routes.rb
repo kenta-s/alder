@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       resources :tasks, only: [:index, :show]
       resources :task_applications, only: [:index, :show, :create, :destroy]
       resources :messages, only: [:index, :create]
+      resources :message_counts, only: [:index]
       # resources :messages do
       #   collection do
       #     get :inbox
