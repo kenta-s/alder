@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserSignUp = (props) => {
-  const { registerUser } = props
+  const { registerUser, history } = props
   const classes = useStyles();
   const [values, setValues] = React.useState({
     name: '',
@@ -48,6 +48,7 @@ const UserSignUp = (props) => {
   const signUp = () => {
     registerUser({ email: values.email, name: values.name, password: values.password, status: values.userStatus })
       .then(response => {
+        history.push('/thankyou')
       })
       .catch(error => {
         console.error(error)
