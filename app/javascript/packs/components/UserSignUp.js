@@ -50,14 +50,11 @@ const UserSignUp = (props) => {
   };
 
   const signUp = () => {
-    // registerUser(values)
     registerUser({ email: values.email, name: values.name, password: values.password, status: values.userStatus })
       .then(response => {
-        console.log('aaaaaaaaaaa')
       })
       .catch(error => {
         console.error(error)
-        console.error('bbbbbbbbb')
       })
   }
 
