@@ -9,8 +9,9 @@ describe Api::V1::TasksController, type: :request do
     end
 
     it 'should return 10 tasks' do
-      sign_in user
-      get '/api/v1/tasks'
+      login
+      auth_params = get_auth_params_from_login_response_headers(response)
+      get '/api/v1/tasks', headers: auth_params
       json = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
@@ -23,8 +24,9 @@ describe Api::V1::TasksController, type: :request do
     let(:task) { FactoryBot.create(:task, title: 'foo', description: 'bar', end_at: Time.zone.local(2019, 10, 1, 9, 0)) }
 
     it 'should return a task' do
-      sign_in user
-      get "/api/v1/tasks/#{task.id}"
+      login
+      auth_params = get_auth_params_from_login_response_headers(response)
+      get "/api/v1/tasks/#{task.id}", headers: auth_params
       json = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
