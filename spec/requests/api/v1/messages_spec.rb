@@ -25,11 +25,11 @@ describe Api::V1::MessagesController, type: :request do
 
         expect(response.status).to eq(200)
         expect(json.size).to eq(5)
-        expect(json.dig(0, 'content')).to eq('this is a message5')
-        expect(json.dig(1, 'content')).to eq('this is a message4')
+        expect(json.dig(0, 'content')).to eq('this is a message1')
+        expect(json.dig(1, 'content')).to eq('this is a message2')
         expect(json.dig(2, 'content')).to eq('this is a message3')
-        expect(json.dig(3, 'content')).to eq('this is a message2')
-        expect(json.dig(4, 'content')).to eq('this is a message1')
+        expect(json.dig(3, 'content')).to eq('this is a message4')
+        expect(json.dig(4, 'content')).to eq('this is a message5')
       end
     end
 
@@ -44,8 +44,8 @@ describe Api::V1::MessagesController, type: :request do
 
         expect(response.status).to eq(200)
         expect(json.size).to eq(2)
-        expect(json.dig(0, 'content')).to eq('this is a message7')
-        expect(json.dig(1, 'content')).to eq('this is a message6')
+        expect(json.dig(0, 'content')).to eq('this is a message6')
+        expect(json.dig(1, 'content')).to eq('this is a message7')
       end
     end
   end
@@ -59,7 +59,7 @@ describe Api::V1::MessagesController, type: :request do
       it 'should create a new message' do
         login
         auth_params = get_auth_params_from_login_response_headers(response)
-        expect{ post "/api/v1/messages/", headers: auth_params, params: {message: {recipient_id: user2.id, content: 'this is a pen'}} }.to change {user2.got_messages.count}.by(1).and change {user1.sent_messages.count}.by(1)
+        expect{ post "/api/v1/messages/", headers: auth_params, params: {message: {recipient_name: user2.name, content: 'this is a pen'}} }.to change {user2.got_messages.count}.by(1).and change {user1.sent_messages.count}.by(1)
         
         json = JSON.parse(response.body)
    

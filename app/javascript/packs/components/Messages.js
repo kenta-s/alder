@@ -3,7 +3,9 @@ import { connect } from "react-redux"
 import { makeStyles } from '@material-ui/core/styles';
 import {
   fetchMessages,
+  postMessage,
 } from "../redux/actions/messages"
+import { withRouter } from 'react-router'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Messages({messages, fetchMessages}) {
+function Messages({messages, fetchMessages, postMessage, match}) {
   const classes = useStyles();
   useEffect(() => {
     fetchMessages()
@@ -32,9 +34,9 @@ function Messages({messages, fetchMessages}) {
   const [newMessage, setNewMessage] = useState('')
   const rows = messages
   const sendMessage = () => {
-    console.log('called')
-    console.log(newMessage)
-    setNewMessage('')
+    postMessage(newMessage, match.params.name).then(response => {
+      setNewMessage('')
+    })
   }
 
   return (
@@ -84,10 +86,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchMessages: () => dispatch(fetchMessages()),
+    postMessage: (content, userName) => dispatch(postMessage(content, userName)),
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps 
-)(Messages);
+)(Messages));

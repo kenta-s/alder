@@ -52,7 +52,7 @@ export function fetchMessages() {
   }
 }
 
-export function postMessage(content, userId) {
+export function postMessage(content, userName) {
   const instance = axios.create({
     headers: {
       "access-token": getStorage().getItem('access-token'),
@@ -65,13 +65,14 @@ export function postMessage(content, userId) {
 
   return dispatch => {
     dispatch(startLoading())
-    return instance.post(`/api/v1/messages`, {message: {user_id: userId, content}})
+    return instance.post(`/api/v1/messages`, {message: {recipient_name: userName, content}})
       .then(response => {
         dispatch(receiveMessage(response.data))
         return response
       })
-      .catch(() => {
-        return dispatch(flashMessage(ERROR_MESSAGE, {isError: true}))
+      .catch(error => {
+        dispatch(flashMessage(ERROR_MESSAGE, {isError: true}))
+        return error
       })
       .then(response => {
         dispatch(finishLoading())
