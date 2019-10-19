@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { connect } from "react-redux"
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  fetchMessageCounts,
+} from "../redux/actions/messageCounts"
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Title from './Title';
 
 const useStyles = makeStyles({
   root: {
@@ -29,12 +34,17 @@ const rows = [
   createData('Gingerbread', 0),
 ];
 
-export default function SimpleTable() {
+function MessageCounts({messageCounts, fetchMessageCounts}) {
   const classes = useStyles();
-  // const rows = rows
+  useEffect(() => {
+    fetchMessageCounts()
+  }, [])
+
+  const rows = messageCounts
 
   return (
-    <Paper className={classes.root}>
+    <React.Fragment>
+      <Title>Messages</Title>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -53,6 +63,23 @@ export default function SimpleTable() {
           ))}
         </TableBody>
       </Table>
-    </Paper>
+    </React.Fragment>
   );
 }
+
+const mapStateToProps = state => {
+  return { 
+    messageCounts: state.messageCounts.data,
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchMessageCounts: () => dispatch(fetchMessageCounts()),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps 
+)(MessageCounts);

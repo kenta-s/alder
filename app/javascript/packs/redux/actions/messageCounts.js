@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { flashMessage } from 'redux-flash'
 import { 
-  MESSAGES_RECEIVE_MESSAGES,
+  MESSAGE_COUNTS_RECEIVE_MESSAGE_COUNTS,
 } from '../actionTypes'
 import {
   ERROR_MESSAGE,
@@ -10,7 +10,7 @@ import {
 } from './common'
 
 const receiveMessages = payload => ({
-  type: MESSAGES_RECEIVE_MESSAGES,
+  type: MESSAGE_COUNTS_RECEIVE_MESSAGE_COUNTS,
   payload,
 })
 
@@ -18,7 +18,7 @@ const getStorage = () => {
  return localStorage
 }
 
-export function fetchMessages() {
+export function fetchMessageCounts() {
   const instance = axios.create({
     headers: {
       "access-token": getStorage().getItem('access-token'),
@@ -31,7 +31,7 @@ export function fetchMessages() {
 
   return dispatch => {
     dispatch(startLoading())
-    return instance.get(`/api/v1/messages`)
+    return instance.get(`/api/v1/message_counts`)
       .then(response => {
         dispatch(receiveMessages(response.data))
         return response
