@@ -31,6 +31,7 @@ import Tasks from './Tasks'
 import Task from './Task'
 import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
+import Thankyou from './Thankyou'
 import { generateRequireSignInWrapper } from 'redux-token-auth'
 
 const requireSignIn = generateRequireSignInWrapper({
@@ -205,6 +206,7 @@ export default function App({goToTasks}) {
                   <Route exact path="/tasks/:id" component={Task} />
                   <Route exact path="/signin" component={UserSignIn} />
                   <Route exact path="/signup" component={UserSignUp} />
+                  <Route exact path="/thankyou" component={Thankyou} />
                 </Switch>
               </Paper>
             </Grid>
