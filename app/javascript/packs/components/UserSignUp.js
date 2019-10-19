@@ -41,10 +41,6 @@ const UserSignUp = (props) => {
     userStatus: '',
   });
 
-  const handleRadioChange = event => {
-    setValue(event.target.value);
-  };
-
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
@@ -99,7 +95,7 @@ const UserSignUp = (props) => {
           </RadioGroup>
         </FormControl>
       </form>
-      <Button variant="contained" color="primary" onClick={signUp}>
+      <Button variant="contained" color="primary" onClick={signUp} disabled={!(values.name !== '' && values.email !== '' && values.password !== '' && values.passwordConfirmation !== '' && values.userStatus !== '' && values.password === values.passwordConfirmation)}>
         サインアップ
       </Button>
     </React.Fragment>
