@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "react-redux"
 import { Route, Switch } from 'react-router';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,10 +37,17 @@ import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
 import Thankyou from './Thankyou'
 import { generateRequireSignInWrapper } from 'redux-token-auth'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const requireSignIn = generateRequireSignInWrapper({
   redirectPathIfNotSignedIn: '/signin',
 })
+
+// import { makeStyles } from '@material-ui/core/styles';
+
+// const useStyles = makeStyles(theme => ({
+// }));
+
 
 function Copyright() {
   return (
@@ -133,9 +141,12 @@ const useStyles = makeStyles(theme => ({
   fixedHeight: {
     height: 240,
   },
+  progress: {
+    margin: theme.spacing(2),
+  },
 }));
 
-export default function App({goToTasks, history}) {
+function App({history}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -148,6 +159,7 @@ export default function App({goToTasks, history}) {
 
   return (
     <div className={classes.root}>
+      { false && <CircularProgress className={classes.progress} /> }
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
@@ -186,7 +198,7 @@ export default function App({goToTasks, history}) {
         <List>
           <div>
             { /* <ListItem button onClick={() => this.props.history.push(`/tasks`)}> */ }
-            <ListItem button onClick={goToTasks}>
+            <ListItem button onClick={() => history.push(`/tasks`)}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
@@ -227,3 +239,21 @@ export default function App({goToTasks, history}) {
     </div>
   );
 }
+
+export default App
+// const mapStateToProps = state => {
+//   return { 
+//     messageCounts: state.messageCounts.data,
+//   }
+// };
+// 
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     // fetchMessageCounts: () => dispatch(fetchMessageCounts()),
+//   }
+// }
+// 
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps 
+// )(App);

@@ -12,8 +12,6 @@ import { ConnectedRouter } from 'connected-react-router'
 
 import { Provider } from 'react-redux'
 import store, { history } from "./redux/store";
-import Header from './components/Header'
-import Sidebar from './components/Sidebar'
 import Tasks from './components/Tasks'
 import Task from './components/Task'
 import App from './components/App'
@@ -27,7 +25,7 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme} >
       <ConnectedRouter history={history}>
-		    <App goToTasks={() => history.push(`/tasks`)} history={history} />
+		    <App history={history} />
 		  	<FlashMessages />
       </ConnectedRouter>
     </MuiThemeProvider>
