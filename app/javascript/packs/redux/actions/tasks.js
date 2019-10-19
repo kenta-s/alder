@@ -15,23 +15,22 @@ const receiveTasks = tasks => ({
 })
 
 const getStorage = () => {
- return window.localStorage
+ return localStorage
 }
 
 export function fetchTasks() {
   const instance = axios.create({
     headers: {
-      "access-token": getStorage()['access-token'],
+      "access-token": getStorage().getItem('access-token'),
       "token-type":   "Bearer",
-      "client":       getStorage()['client'],
-      "expiry":       getStorage()['expiry'],
-      "uid":          getStorage()['uid']
+      "client":       getStorage().getItem('client'),
+      "expiry":       getStorage().getItem('expiry'),
+      "uid":          getStorage().getItem('uid')
     }
   })
-  
+
   return dispatch => {
     dispatch(startLoading())
-    // return axios(`/api/v1/tasks`)
     return instance.get(`/api/v1/tasks`)
       .then(response => {
         dispatch(receiveTasks(response.data))
