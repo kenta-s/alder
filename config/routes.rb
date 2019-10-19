@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :signin, only: [:index]
   resources :signup, only: [:index]
   resources :thankyou, only: [:index]
+  resources :messages, only: [:index]
   resources :users, param: :name do
     resources :messages, only: [:index], controller: 'users/messages'
   end
