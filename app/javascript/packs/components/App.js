@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from "react-redux"
 import { Route, Switch } from 'react-router';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
-// import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -31,6 +29,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 // import Orders from './Orders';
 import Tasks from './Tasks'
 import Task from './Task'
+import Loading from './Loading'
 import MessageCounts from './MessageCounts'
 import Messages from './Messages'
 import UserSignIn from './UserSignIn'
@@ -42,11 +41,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const requireSignIn = generateRequireSignInWrapper({
   redirectPathIfNotSignedIn: '/signin',
 })
-
-// import { makeStyles } from '@material-ui/core/styles';
-
-// const useStyles = makeStyles(theme => ({
-// }));
 
 
 function Copyright() {
@@ -143,6 +137,9 @@ const useStyles = makeStyles(theme => ({
   },
   progress: {
     margin: theme.spacing(2),
+    position: 'absolute',
+    top: 'calc(50% - 40px)',
+    left: 'calc(50% - 40px)',
   },
 }));
 
@@ -159,7 +156,7 @@ function App({history}) {
 
   return (
     <div className={classes.root}>
-      { false && <CircularProgress className={classes.progress} /> }
+      <Loading />
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
@@ -197,7 +194,6 @@ function App({history}) {
         <Divider />
         <List>
           <div>
-            { /* <ListItem button onClick={() => this.props.history.push(`/tasks`)}> */ }
             <ListItem button onClick={() => history.push(`/tasks`)}>
               <ListItemIcon>
                 <DashboardIcon />
@@ -240,20 +236,4 @@ function App({history}) {
   );
 }
 
-export default App
-// const mapStateToProps = state => {
-//   return { 
-//     messageCounts: state.messageCounts.data,
-//   }
-// };
-// 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     // fetchMessageCounts: () => dispatch(fetchMessageCounts()),
-//   }
-// }
-// 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps 
-// )(App);
+export default App;

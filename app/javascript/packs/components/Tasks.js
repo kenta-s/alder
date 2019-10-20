@@ -41,6 +41,7 @@ class Tasks extends React.Component {
   }
 }
 
+// export default Tasks
 const mapStateToProps = state => {
   return { 
     tasks: state.tasks.data,
