@@ -59,7 +59,7 @@ const UserSignUp = (props) => {
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
-          label="user ID"
+          label="User ID(半角英数字とアンダーバー、ハイフンが使えます)"
           fullWidth
           margin="normal"
           onChange={handleChange('name')}
@@ -73,7 +73,7 @@ const UserSignUp = (props) => {
           value={values.email}
         />
         <TextField
-          label="Password"
+          label="パスワード"
           fullWidth
           margin="normal"
           type="password"
@@ -81,7 +81,7 @@ const UserSignUp = (props) => {
           value={values.password}
         />
         <TextField
-          label="Password Confirmation"
+          label="パスワード(確認)"
           fullWidth
           margin="normal"
           type="password"
