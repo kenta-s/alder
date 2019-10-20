@@ -32,7 +32,10 @@ function Messages({messages, fetchMessages, postMessage, match}) {
   }, [])
 
   const [newMessage, setNewMessage] = useState('')
-  const rows = messages
+	const userName = match.params.name
+  const rows = messages.filter(message => {
+	  return message.senderName === userName || message.recipientName === userName
+	})
   const sendMessage = () => {
     postMessage(newMessage, match.params.name).then(response => {
       setNewMessage('')

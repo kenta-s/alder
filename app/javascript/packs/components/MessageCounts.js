@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux"
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -11,6 +11,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Title from './Title';
+import NewMessageModal from './NewMessageModal';
+// import Fab from '@material-ui/core/Fab';
+// import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   root: {
@@ -22,16 +25,17 @@ const useStyles = makeStyles({
   },
   row: {
     cursor: 'pointer',
-  }
+  },
 });
 
-function MessageCounts({messageCounts, fetchMessageCounts, history}) {
+function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser}) {
   const classes = useStyles();
   useEffect(() => {
     fetchMessageCounts()
   }, [])
 
   const rows = messageCounts
+  const [isNewMessageModalOpen, openNewMessageModal] = useState(false)
 
   return (
     <React.Fragment>
@@ -61,6 +65,9 @@ function MessageCounts({messageCounts, fetchMessageCounts, history}) {
           メッセージはありません
         </div>
       }
+      { (currentUser.status === 'admin' || currentUser.status === 'professional') &&
+			  <NewMessageModal />
+      }
     </React.Fragment>
   );
 }
@@ -68,6 +75,7 @@ function MessageCounts({messageCounts, fetchMessageCounts, history}) {
 const mapStateToProps = state => {
   return { 
     messageCounts: state.messageCounts.data,
+    currentUser: state.reduxTokenAuth.currentUser.attributes,
   }
 };
 
