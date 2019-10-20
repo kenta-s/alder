@@ -165,7 +165,7 @@ const App = ({history}) => {
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <NavbarMenu open={open} handleDrawerOpen={handleDrawerOpen} />
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} onClick={() => { history.push('/')}}>
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} onClick={() => { location.href = "/"}}>
             Proprogramming
           </Typography>
           { /* TODO: implement

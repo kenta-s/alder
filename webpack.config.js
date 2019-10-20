@@ -2,18 +2,27 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
-module.exports = {
+const config = {
   context: path.resolve(__dirname, 'app', 'javascript', 'packs'),
-  entry: {
-    application: './application.js',
-    applicationStyle: './css/application.scss',
-  },
   output: {
     path: path.resolve(__dirname, 'public', 'packs'),
     filename: '[name]-[hash].js'
   },
   module: {
     rules: [
+      {
+        test: /\.(jpg|jpeg|png|svg|webp)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images/',
+              publicPath: '/packs/images',
+              emitFile: true,
+            },
+          },
+        ]
+      },
       {
         test: /\.(js)$/,
         loaders: 'babel-loader',
@@ -50,4 +59,32 @@ module.exports = {
       ignoreOrder: false,
     }),
   ]
-};
+}
+
+const mainConfig = mode => {
+  return Object.assign({}, config, {
+    entry: {
+      application: './application.js',
+      applicationStyle: './css/application.scss',
+      landingPage: './landingPage.js',
+      landingPageStyle: './css/landing/landingPage.scss',
+    },
+  })
+}
+
+// const landingPageConfig = () => {
+//   return Object.assign({}, config, {
+//     entry: {
+//       landingPage: './landingPage.js',
+//       landingPageStyle: './css/landing/landingPage.scss',
+//     },
+//   })
+// }
+
+module.exports = (env, argv) => {
+  const mode = argv.mode === 'production' ? 'production' : 'development'
+  return [
+    mainConfig(mode),
+    // landingPageConfig(),
+  ]
+}
