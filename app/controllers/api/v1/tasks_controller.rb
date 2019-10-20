@@ -6,6 +6,6 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def show
-    render json: Task.find(params[:id])
+    @task = Task.includes(:task_applications).find(params[:id])
   end
 end

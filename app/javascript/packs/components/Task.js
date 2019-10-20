@@ -1,12 +1,13 @@
 import React from "react";
 import { connect } from "react-redux"
+import { withRouter } from 'react-router'
 import {
-  fetchTasks,
-} from "../redux/actions/tasks"
-import {
-  fetchTaskApplications,
+  fetchTask,
   createTaskApplication,
-} from "../redux/actions/taskApplications"
+} from "../redux/actions/task"
+// import {
+//   fetchTaskApplications,
+// } from "../redux/actions/taskApplications"
 import TaskApplyModal from './TaskApplyModal'
 import Button from '@material-ui/core/Button';
 
@@ -14,39 +15,36 @@ class Task extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      task: null,
-    };
+    // this.state = {
+    //   task: null,
+    // };
   }
-	applyForTask = (id) => {
-    this.props.createTaskApplication(this.props.csrftoken, id)
+	applyForTask = (taskId) => {
+    this.props.createTaskApplication(taskId)
 	}
   componentDidMount() {
-    this.props.fetchTasks()
-      .then(response => {
-        const task = response.data.find(task => task.id === Number(this.props.match.params.id))
-        this.setState({task})
-      })
-    this.props.fetchTaskApplications()
+    this.props.fetchTask(this.props.match.params.id)
   }
   render(){
-    const task = this.state.task
-    const taskApplication = task && this.props.taskApplications.find(taskApplication => taskApplication.task_id === task.id)
+    const task = this.props.task
+    const taskApplication = false
+    const applied = task.taskApplications.some(application => application.applicant_name === this.props.currentUser.name)
+    // const taskApplication = task && this.props.taskApplications.find(taskApplication => taskApplication.task_id === task.id)
     return(
-      <div>
-        {task && <h3>{task.title}</h3>}
-        {task && <p>詳細: {task.description}</p>}
-        {task && <p>応募期限: {task.end_at}</p>}
-        {taskApplication ?
-            <div>
-              <Button variant="contained" color="secondary" disabled>
-                応募済み
-              </Button>
-            </div>
-            :
-				    <div>
-              {task && <TaskApplyModal task={task} applyForTask={this.applyForTask} />}
-				    </div>
+      <div key={task.taskApplications.length}>
+        <h3>{task.title}</h3>
+        <p>詳細: {task.description}</p>
+        <p>応募期限: {task.expiresAt}</p>
+        {applied ?
+          <div>
+            <Button variant="contained" color="secondary" disabled>
+              応募済み
+            </Button>
+          </div>
+          :
+				  <div>
+            <TaskApplyModal task={task} applyForTask={this.applyForTask} />
+				  </div>
         }
       </div>
     )
@@ -55,21 +53,22 @@ class Task extends React.Component {
 
 const mapStateToProps = state => {
   return { 
-    tasks: state.tasks.data,
-    taskApplications: state.taskApplications.data,
-    csrftoken: state.csrftoken.token,
+    task: state.task,
+    currentUser: state.reduxTokenAuth.currentUser.attributes,
+    // taskApplications: state.taskApplications.data,
+    // csrftoken: state.csrftoken.token,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTasks: () => dispatch(fetchTasks()),
-    fetchTaskApplications: () => dispatch(fetchTaskApplications()),
+    fetchTask: id => dispatch(fetchTask(id)),
+    // fetchTaskApplications: () => dispatch(fetchTaskApplications()),
     createTaskApplication: (csrftoken, id) => dispatch(createTaskApplication(csrftoken, id)),
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps 
-)(Task);
+)(Task));

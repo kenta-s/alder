@@ -1,6 +1,5 @@
 json.id @task_application.id
+json.applicant_id @task_application.user.id
+json.applicant_name @task_application.user.name
 json.status @task_application.status
 json.task_id @task_application.task_id
-json.task_title @task_application.task_title
-json.task_description @task_application.task_description
-json.task_end_at @task_application.task_end_at
