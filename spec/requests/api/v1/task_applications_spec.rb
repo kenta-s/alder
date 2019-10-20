@@ -78,8 +78,6 @@ describe Api::V1::TaskApplicationsController, type: :request do
    
       expect(response.status).to eq(200)
       expect(json['status']).to eq('pending')
-      expect(json['task_title']).to eq('test task1')
-      expect(json['task_end_at']).to eq('2019-10-02T11:30:00.000+09:00')
     end
   end
 
@@ -97,7 +95,6 @@ describe Api::V1::TaskApplicationsController, type: :request do
    
         expect(response.status).to eq(201)
         expect(json['status']).to eq('pending')
-        expect(json['task_title']).to eq('test task')
       end
     end
   end
