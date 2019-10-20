@@ -41,7 +41,7 @@ class UserSignIn extends React.Component {
 	  return(
       <form noValidate autoComplete="off">
         <TextField
-          label="Email or UserID"
+          label="Email"
           fullWidth
           margin="normal"
           onChange={this.handleChange('email')}
