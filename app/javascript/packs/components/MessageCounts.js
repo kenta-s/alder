@@ -49,7 +49,7 @@ function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser,
           <TableHead>
             <TableRow>
               <TableCell>name</TableCell>
-              <TableCell align="right">unread</TableCell>
+        { /* <TableCell align="right">unread</TableCell> */ }
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,7 +58,7 @@ function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser,
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell align="right">{row.unreadCount}</TableCell>
+              { /* <TableCell align="right">{row.unreadCount}</TableCell> */ }
               </TableRow>
             ))}
           </TableBody>

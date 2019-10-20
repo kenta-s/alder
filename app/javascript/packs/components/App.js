@@ -38,13 +38,13 @@ import Messages from './Messages'
 import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
 import Thankyou from './Thankyou'
-import { generateRequireSignInWrapper } from 'redux-token-auth'
+import NavbarMenu from './NavbarMenu'
+// import { generateRequireSignInWrapper } from 'redux-token-auth'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const requireSignIn = generateRequireSignInWrapper({
-  redirectPathIfNotSignedIn: '/signin',
-})
-
+// const requireSignIn = generateRequireSignInWrapper({
+//   redirectPathIfNotSignedIn: '/signin',
+// })
 
 function Copyright() {
   return (
@@ -98,6 +98,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    cursor: 'pointer',
   },
   drawerPaper: {
     position: 'relative',
@@ -163,23 +164,17 @@ const App = ({history}) => {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
+          <NavbarMenu open={open} handleDrawerOpen={handleDrawerOpen} />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} onClick={() => { history.push('/')}}>
             Proprogramming
           </Typography>
+          { /* TODO: implement
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          */ }
         </Toolbar>
       </AppBar>
       <Drawer
