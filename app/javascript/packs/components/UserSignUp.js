@@ -11,6 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { registerUser } from '../redux-token-auth-config'
+import {
+  redirectUnlessGuest,
+} from "../redux/actions/common"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -31,8 +34,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserSignUp = (props) => {
-  const { registerUser, history } = props
+  const { registerUser, history, currentUser, redirectUnlessGuest } = props
   const classes = useStyles();
+  React.useEffect(() => {
+    redirectUnlessGuest(currentUser)
+  })
   const [values, setValues] = React.useState({
     name: '',
     email: '',
@@ -59,7 +65,7 @@ const UserSignUp = (props) => {
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
-          label="User ID(半角英数字とアンダーバー、ハイフンが使えます)"
+          label="User ID"
           fullWidth
           margin="normal"
           onChange={handleChange('name')}
@@ -105,13 +111,20 @@ const UserSignUp = (props) => {
   );
 }
 
+const mapStateToProps = state => {
+  return { 
+    currentUser: state.reduxTokenAuth.currentUser,
+  }
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     registerUser: (data) => dispatch(registerUser(data)),
+    redirectUnlessGuest: currentUser => dispatch(redirectUnlessGuest(currentUser)),
   }
 }
 
 export default connect(
-  null,
-  { registerUser } 
+  mapStateToProps,
+  mapDispatchToProps 
 )(UserSignUp);

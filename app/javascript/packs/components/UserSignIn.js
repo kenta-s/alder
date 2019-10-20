@@ -9,6 +9,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { signInUser } from '../redux-token-auth-config'
 import { flashMessage } from 'redux-flash'
+import {
+  redirectUnlessGuest,
+} from "../redux/actions/common"
 
 class UserSignIn extends React.Component {
   constructor(props) {
@@ -18,6 +21,10 @@ class UserSignIn extends React.Component {
       email: '',
       password: '',
     };
+  }
+
+  componentDidUpdate(){
+    this.props.redirectUnlessGuest(this.props.currentUser)
   }
 
   handleChange = name => event => {
@@ -64,14 +71,21 @@ class UserSignIn extends React.Component {
 	}
 }
 
+const mapStateToProps = state => {
+  return { 
+    currentUser: state.reduxTokenAuth.currentUser,
+  }
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     flashMessage: (message) => dispatch(flashMessage(message)), 
     signInUser: (data) => dispatch(signInUser(data)),
+    redirectUnlessGuest: currentUser => dispatch(redirectUnlessGuest(currentUser)),
   }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps 
 )(UserSignIn);

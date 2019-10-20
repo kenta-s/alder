@@ -24,11 +24,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-// import { mainListItems, secondaryListItems } from './listItems';
-// import { mainListItems } from './listItems';
-// import Chart from './Chart';
-// import Deposits from './Deposits';
-// import Orders from './Orders';
 import SidebarSecondListItems from './SidebarSecondListItems'
 import Tasks from './Tasks'
 import Task from './Task'
@@ -39,12 +34,7 @@ import UserSignIn from './UserSignIn'
 import UserSignUp from './UserSignUp'
 import Thankyou from './Thankyou'
 import NavbarMenu from './NavbarMenu'
-// import { generateRequireSignInWrapper } from 'redux-token-auth'
 import CircularProgress from '@material-ui/core/CircularProgress';
-
-// const requireSignIn = generateRequireSignInWrapper({
-//   redirectPathIfNotSignedIn: '/signin',
-// })
 
 function Copyright() {
   return (
@@ -166,7 +156,7 @@ const App = ({history}) => {
         <Toolbar className={classes.toolbar}>
           <NavbarMenu open={open} handleDrawerOpen={handleDrawerOpen} />
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title} onClick={() => { location.href = "/"}}>
-            Proprogramming
+            プロプログラミング
           </Typography>
           { /* TODO: implement
           <IconButton color="inherit">

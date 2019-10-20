@@ -28,14 +28,21 @@ export function getCsrftoken() {
   }
 }
 
-export const authenticateUser = (currentUser) => {
-  console.log('called 1')
+export const authenticateUser = currentUser => {
   return dispatch => {
-    console.log('called 2')
     if(!currentUser.isLoading && !currentUser.isSignedIn){
-      console.log('called 3')
       history.push('/signin')
       dispatch(flashMessage('ログインしてください', {isError: true}))
+      return false
+    }
+    return true
+  }
+}
+
+export const redirectUnlessGuest = currentUser => {
+  return dispatch => {
+    if(!currentUser.isLoading && currentUser.isSignedIn){
+      history.push('/tasks')
       return false
     }
     return true
