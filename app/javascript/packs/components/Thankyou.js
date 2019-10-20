@@ -38,9 +38,9 @@ const Thankyou = (props) => {
       <div>
         仮登録メールを送信しました。<br />
         メールが届かない場合は迷惑メールフォルダをご確認ください。<br />
-        <Link to="/">
+        <a href='/'>
           TOPへ
-        </Link>
+        </a>
       </div>
     </React.Fragment>
   );
