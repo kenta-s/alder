@@ -38,7 +38,7 @@ const UserSignUp = (props) => {
     email: '',
     password: '',
     passwordConfirmation: '',
-    userStatus: '',
+    // userStatus: 'apprentice', // TODO: handle professional as well
   });
 
   const handleChange = name => event => {
@@ -46,7 +46,7 @@ const UserSignUp = (props) => {
   };
 
   const signUp = () => {
-    registerUser({ email: values.email, name: values.name, password: values.password, status: values.userStatus })
+    registerUser({ email: values.email, name: values.name, password: values.password })
       .then(response => {
         history.push('/thankyou')
       })
@@ -66,7 +66,7 @@ const UserSignUp = (props) => {
           value={values.name}
         />
         <TextField
-          label="Email or UserID"
+          label="Email"
           fullWidth
           margin="normal"
           onChange={handleChange('email')}
@@ -88,6 +88,7 @@ const UserSignUp = (props) => {
           onChange={handleChange('passwordConfirmation')}
           value={values.passwordConfirmation}
         />
+      { /*
         <FormControl component="fieldset" className={classes.formControl}>
           <FormLabel component="legend">駆け出し or 現役エンジニア</FormLabel>
           <RadioGroup aria-label="userStatus" name="userStatus" value={values.userStatus} onChange={handleChange('userStatus')}>
@@ -95,8 +96,9 @@ const UserSignUp = (props) => {
             <FormControlLabel value="professional" control={<Radio />} label="現役エンジニア" />
           </RadioGroup>
         </FormControl>
+      */ }
       </form>
-      <Button variant="contained" color="primary" onClick={signUp} disabled={!(values.name !== '' && values.email !== '' && values.password !== '' && values.passwordConfirmation !== '' && values.userStatus !== '' && values.password === values.passwordConfirmation)}>
+      <Button variant="contained" color="primary" onClick={signUp} disabled={!(values.name !== '' && values.email !== '' && values.password !== '' && values.passwordConfirmation !== '' && values.password === values.passwordConfirmation)}>
         サインアップ
       </Button>
     </React.Fragment>

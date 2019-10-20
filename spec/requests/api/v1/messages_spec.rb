@@ -63,7 +63,7 @@ describe Api::V1::MessagesController, type: :request do
         
         json = JSON.parse(response.body)
    
-        expect(response.status).to eq(201)
+        expect(response.status).to eq(200)
         expect(json['content']).to eq('this is a pen')
       end
     end

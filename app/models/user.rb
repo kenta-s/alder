@@ -19,4 +19,9 @@ class User < ApplicationRecord
     professional: 10,
     admin: 42,
   }
+
+  # TODO: remove this callback when professional is ready
+  before_create do |user|
+    user.status = :apprentice
+  end
 end
