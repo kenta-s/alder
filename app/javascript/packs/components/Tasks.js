@@ -10,10 +10,15 @@ import { withRouter } from 'react-router'
 import {
   fetchTasks,
 } from "../redux/actions/tasks"
+import {
+  authenticateUser,
+} from "../redux/actions/common"
 
 class Tasks extends React.Component {
   componentDidMount() {
-    this.props.fetchTasks()
+    if(this.props.authenticateUser(this.props.currentUser)){
+      this.props.fetchTasks()
+    }
   }
   render(){
     const tasks = this.props.tasks
@@ -41,16 +46,17 @@ class Tasks extends React.Component {
   }
 }
 
-// export default Tasks
 const mapStateToProps = state => {
   return { 
     tasks: state.tasks.data,
+    currentUser: state.reduxTokenAuth.currentUser,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchTasks: () => dispatch(fetchTasks()),
+    authenticateUser: currentUser => dispatch(authenticateUser(currentUser)),
   }
 }
 

@@ -146,7 +146,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function App({history}) {
+const App = ({history}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -156,11 +156,6 @@ function App({history}) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  // const logout = () => {
-  //   signOutUser()
-  //     .then(() => history.push('/'))
-  //     .catch(() => )
-  // }
 
   return (
     <div className={classes.root}>
@@ -217,8 +212,6 @@ function App({history}) {
           </div>
         </List>
         <Divider />
-        { /* <Divider />
-        <List>{secondaryListItems}</List> */ }
         <SidebarSecondListItems />
       </Drawer>
       <main className={classes.content}>
@@ -228,10 +221,10 @@ function App({history}) {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Switch>
-                  <Route exact path="/tasks" component={requireSignIn(Tasks)} />
-                  <Route exact path="/tasks/:id" component={requireSignIn(Task)} />
-                  <Route exact path="/users/:name/messages" component={requireSignIn(Messages)} />
-                  <Route exact path="/messages" component={requireSignIn(MessageCounts)} />
+                  <Route exact path="/tasks" component={Tasks} />
+                  <Route exact path="/tasks/:id" component={Task} />
+                  <Route exact path="/users/:name/messages" component={Messages} />
+                  <Route exact path="/messages" component={MessageCounts} />
                   <Route exact path="/signin" component={UserSignIn} />
                   <Route exact path="/signup" component={UserSignUp} />
                   <Route exact path="/thankyou" component={Thankyou} />

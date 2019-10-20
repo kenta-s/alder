@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   fetchMessageCounts,
 } from "../redux/actions/messageCounts"
+import {
+  authenticateUser,
+} from "../redux/actions/common"
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,8 +15,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Title from './Title';
 import NewMessageModal from './NewMessageModal';
-// import Fab from '@material-ui/core/Fab';
-// import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   root: {
@@ -28,10 +29,12 @@ const useStyles = makeStyles({
   },
 });
 
-function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser}) {
+function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser, authenticateUser}) {
   const classes = useStyles();
   useEffect(() => {
-    fetchMessageCounts()
+    if(authenticateUser(currentUser)){
+      fetchMessageCounts()
+    }
   }, [])
 
   const rows = messageCounts
@@ -65,7 +68,7 @@ function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser}
           メッセージはありません
         </div>
       }
-      { (currentUser.status === 'admin' || currentUser.status === 'professional') &&
+      { (currentUser.attributes.status === 'admin' || currentUser.attributes.status === 'professional') &&
 			  <NewMessageModal />
       }
     </React.Fragment>
@@ -75,13 +78,14 @@ function MessageCounts({messageCounts, fetchMessageCounts, history, currentUser}
 const mapStateToProps = state => {
   return { 
     messageCounts: state.messageCounts.data,
-    currentUser: state.reduxTokenAuth.currentUser.attributes,
+    currentUser: state.reduxTokenAuth.currentUser,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchMessageCounts: () => dispatch(fetchMessageCounts()),
+    authenticateUser: currentUser => dispatch(authenticateUser(currentUser)),
   }
 }
 

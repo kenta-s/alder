@@ -5,6 +5,9 @@ import {
   fetchTask,
   createTaskApplication,
 } from "../redux/actions/task"
+import {
+  authenticateUser,
+} from "../redux/actions/common"
 import TaskApplyModal from './TaskApplyModal'
 import Button from '@material-ui/core/Button';
 
@@ -22,11 +25,13 @@ class Task extends React.Component {
     this.props.createTaskApplication(taskId)
 	}
   componentDidMount() {
-    this.props.fetchTask(this.props.match.params.id)
+    if(this.props.authenticateUser(this.props.currentUser)){
+      this.props.fetchTask(this.props.match.params.id)
+    }
   }
   render(){
     const task = this.props.task
-    const currentUser = this.props.currentUser
+    const currentUser = this.props.currentUser.attributes
     const applied = task.taskApplications.some(application => application.applicant_name === currentUser.name)
     return(
       <div key={task.taskApplications.length}>
@@ -71,17 +76,15 @@ class Task extends React.Component {
 const mapStateToProps = state => {
   return { 
     task: state.task,
-    currentUser: state.reduxTokenAuth.currentUser.attributes,
-    // taskApplications: state.taskApplications.data,
-    // csrftoken: state.csrftoken.token,
+    currentUser: state.reduxTokenAuth.currentUser,
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchTask: id => dispatch(fetchTask(id)),
-    // fetchTaskApplications: () => dispatch(fetchTaskApplications()),
     createTaskApplication: (csrftoken, id) => dispatch(createTaskApplication(csrftoken, id)),
+    authenticateUser: currentUser => dispatch(authenticateUser(currentUser)),
   }
 }
 

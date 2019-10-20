@@ -5,6 +5,9 @@ import {
   fetchMessages,
   postMessage,
 } from "../redux/actions/messages"
+import {
+  authenticateUser,
+} from "../redux/actions/common"
 import { withRouter } from 'react-router'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -25,10 +28,12 @@ const useStyles = makeStyles({
   },
 });
 
-function Messages({messages, fetchMessages, postMessage, match}) {
+function Messages({messages, fetchMessages, postMessage, match, currentUser, authenticateUser}) {
   const classes = useStyles();
   useEffect(() => {
-    fetchMessages()
+    if(authenticateUser(currentUser)){
+      fetchMessages()
+    }
   }, [])
 
   const [newMessage, setNewMessage] = useState('')
@@ -83,6 +88,7 @@ function Messages({messages, fetchMessages, postMessage, match}) {
 const mapStateToProps = state => {
   return { 
     messages: state.messages.data,
+    currentUser: state.reduxTokenAuth.currentUser,
   }
 };
 
@@ -90,6 +96,7 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchMessages: () => dispatch(fetchMessages()),
     postMessage: (content, userName) => dispatch(postMessage(content, userName)),
+    authenticateUser: currentUser => dispatch(authenticateUser(currentUser)),
   }
 }
 

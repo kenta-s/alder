@@ -3,6 +3,8 @@ import {
   LOADING_START,
   LOADING_FINISH,
 } from '../actionTypes'
+import { flashMessage } from 'redux-flash'
+import { history } from "../../redux/store";
 
 export const ERROR_MESSAGE = "サーバーエラーが発生しました"
 
@@ -23,6 +25,20 @@ export function getCsrftoken() {
   return dispatch => {
     const token = document.getElementById('authenticity_token').getAttribute('value');
     dispatch(setCsrftoken(token))
+  }
+}
+
+export const authenticateUser = (currentUser) => {
+  console.log('called 1')
+  return dispatch => {
+    console.log('called 2')
+    if(!currentUser.isLoading && !currentUser.isSignedIn){
+      console.log('called 3')
+      history.push('/signin')
+      dispatch(flashMessage('ログインしてください', {isError: true}))
+      return false
+    }
+    return true
   }
 }
 
