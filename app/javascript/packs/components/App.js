@@ -18,6 +18,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,6 +29,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
+import SidebarSecondListItems from './SidebarSecondListItems'
 import Tasks from './Tasks'
 import Task from './Task'
 import Loading from './Loading'
@@ -153,6 +156,11 @@ function App({history}) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  // const logout = () => {
+  //   signOutUser()
+  //     .then(() => history.push('/'))
+  //     .catch(() => )
+  // }
 
   return (
     <div className={classes.root}>
@@ -196,20 +204,22 @@ function App({history}) {
           <div>
             <ListItem button onClick={() => history.push(`/tasks`)}>
               <ListItemIcon>
-                <DashboardIcon />
+                <AssignmentIcon />
               </ListItemIcon>
               <ListItemText primary="募集中のタスク" />
             </ListItem>
             <ListItem button onClick={() => {history.push('/messages')}}>
               <ListItemIcon>
-                <DashboardIcon />
+                <ChatBubbleIcon />
               </ListItemIcon>
               <ListItemText primary="メッセージ" />
             </ListItem>
           </div>
         </List>
+        <Divider />
         { /* <Divider />
         <List>{secondaryListItems}</List> */ }
+        <SidebarSecondListItems />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
