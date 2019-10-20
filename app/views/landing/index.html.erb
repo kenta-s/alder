@@ -5,11 +5,10 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">詳細</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">料金</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">問い合わせ</a></li>
+          <li class="nav-item"><%= link_to 'ログイン', signin_index_path, class: 'nav-link' %></li>
         </ul>
         <%= link_to 'ユーザー登録', signup_index_path, class: 'btn btn-primary btn-rounded my-0' %>
       </div>
@@ -25,10 +24,13 @@
               <div class="wow fadeInLeft" data-wow-delay="0.3s">
                 <h1 class="h1-responsive font-bold mt-sm-5">プログラマーと一緒に、<br>本物のプログラミング体験を。</h1>
                 <div class="h6">
-                  スクールや本だけでは学ぶことが難しい、メンバーとのコミュニケーション/実用レベルのコード/チケット(タスク)管理など、リアルな実践を積むことができます。
+                  スクールや本だけでは学習が難しい、実用レベルのコードの書き方/チケット(タスク)管理などを学びながら、現役のプログラマーと一緒に仕事を疑似体験することができます。
                 </div>
               </div><br>
-              <div class="wow fadeInLeft" data-wow-delay="0.3s"><a class="btn btn-white dark-grey-text font-bold ml-0" href="https://www.youtube.com/watch?v=60ItHLz5WEA" target="_blank"><i class="fa fa-play mr-1"></i> View Demo</a><a class="btn btn-outline-white" href="#">Learn more</a></div>
+              <div class="wow fadeInLeft" data-wow-delay="0.3s">
+                <%= link_to 'はじめる', signup_index_path, class: 'btn btn-white dark-grey-text font-bold ml-0' %>
+                <a class="btn btn-outline-white" href="#">詳しく</a>
+              </div>
             </div>
           </div>
         </div>
