@@ -7,7 +7,7 @@ const config = {
   userAttributes: {
     name: 'name',
     nickname: 'nickname',
-    status: status,
+    status: 'status',
   },
   userRegistrationAttributes: {
     name: 'name',
