@@ -4,9 +4,11 @@
     <div class="container"><a class="navbar-brand" href="/"><strong>プロプログラミング</strong></a>
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ml-auto">
+          <!--
           <li class="nav-item"><a class="nav-link" href="#about">詳細</a></li>
           <li class="nav-item"><a class="nav-link" href="#pricing">料金</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">問い合わせ</a></li>
+          -->
           <li class="nav-item"><%= link_to 'ログイン', signin_index_path, class: 'nav-link' %></li>
         </ul>
         <%= link_to 'ユーザー登録', signup_index_path, class: 'btn btn-primary btn-rounded my-0' %>
@@ -28,7 +30,9 @@
               </div><br>
               <div class="wow fadeInLeft" data-wow-delay="0.3s">
                 <%= link_to 'はじめる', signup_index_path, class: 'btn btn-white dark-grey-text font-bold ml-0' %>
+              <!--
                 <a class="btn btn-outline-white" href="#">詳しく</a>
+              -->
               </div>
             </div>
           </div>
