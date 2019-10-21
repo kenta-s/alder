@@ -37,16 +37,19 @@ Task.create([
   {
     title: '求人サイトをクロールしてDBにデータを格納',
     description: '求人サイトをクロールしてDB（MySQL）にデータを格納してください',
+    status: :open,
     end_at: Time.zone.local(2019, 9, 30, 10, 30)
   },
   {
     title: 'ウェブアプリケーション機能開発',
     description: '個人で開発しているプロジェクトの機能開発を手伝ってください',
+    status: :open,
     end_at: Time.zone.local(2019, 10, 10, 11, 30)
   },
   {
     title: 'ウェブアプリケーション機能開発(Rails)',
     description: 'Rails, React, MySQLを使っているウェブアプリの機能開発を手伝ってください。Slack, Jira, GitHubを習得できます',
+    status: :open,
     end_at: Time.current + 1.week,
   },
 ])

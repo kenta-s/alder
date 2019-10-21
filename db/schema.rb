@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_10_19_065405) do
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title", limit: 191, null: false
     t.text "description", null: false
+    t.integer "status", null: false
     t.datetime "end_at", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
