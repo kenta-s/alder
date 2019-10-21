@@ -12,6 +12,7 @@ class TaskDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     description: Field::Text,
+    status: Field::String,
     end_at: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
