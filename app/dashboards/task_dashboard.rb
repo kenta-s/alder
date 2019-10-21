@@ -27,6 +27,7 @@ class TaskDashboard < Administrate::BaseDashboard
   id
   title
   description
+  status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,6 +37,7 @@ class TaskDashboard < Administrate::BaseDashboard
   id
   title
   description
+  status
   end_at
   created_at
   updated_at
@@ -48,6 +50,7 @@ class TaskDashboard < Administrate::BaseDashboard
   task_applications
   title
   description
+  status
   end_at
   ].freeze
 
