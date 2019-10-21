@@ -33,11 +33,19 @@ class Task extends React.Component {
     const task = this.props.task
     const currentUser = this.props.currentUser.attributes
     const applied = task.taskApplications.some(application => application.applicant_name === currentUser.name)
+    const description = task.description.split("\n").map(line => {
+      return(
+        <React.Fragment>
+          {line}
+          <br />
+        </React.Fragment>
+      )
+    })
     return(
       <div key={task.taskApplications.length}>
         <h3>{task.title}</h3>
-        <p>詳細: {task.description}</p>
         <p>ステータス: {task.status == 'open' ? '募集中' : '締め切りました'}</p>
+        <p>{description}</p>
         { currentUser.status !== 'professional' && currentUser.status !== 'admin' ?
           <div>
             { task.status == 'closed'
