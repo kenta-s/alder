@@ -1,6 +1,7 @@
 json.id @task.id
 json.title @task.title
 json.description @task.description
+json.status @task.status
 json.end_at @task.end_at
 json.task_applications do
   json.array! @task.task_applications do |task_application|

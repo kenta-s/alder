@@ -7,6 +7,7 @@ const initialState = {
   id: null,
   title: '',
   description: '',
+  status: '',
   expiresAt: '',
   taskApplications: [],
 } 
@@ -14,13 +15,14 @@ const initialState = {
 const task = (state = initialState, action) => {
   switch (action.type) {
     case TASK_RECEIVE_TASK: {
-      const {id, title, description} = action.payload
+      const {id, title, description, status} = action.payload
       const expiresAt = action.payload.end_at
       const taskApplications = action.payload.task_applications
       return {
         id,
         title,
         description,
+        status,
         expiresAt,
         taskApplications,
       };

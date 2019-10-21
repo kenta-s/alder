@@ -37,15 +37,25 @@ class Task extends React.Component {
       <div key={task.taskApplications.length}>
         <h3>{task.title}</h3>
         <p>詳細: {task.description}</p>
-        <p>応募期限: {task.expiresAt}</p>
+        <p>ステータス: {task.status == 'open' ? '募集中' : '締め切りました'}</p>
         { currentUser.status !== 'professional' && currentUser.status !== 'admin' ?
           <div>
-            { applied ?
+            { task.status == 'closed'
+              ?
                 <Button variant="contained" color="secondary" disabled>
-                  応募済み
+                  締め切りました
                 </Button>
               :
-                <TaskApplyModal task={task} applyForTask={this.applyForTask} />
+                <React.Fragment>
+                  { applied
+                    ?
+                      <Button variant="contained" color="secondary" disabled>
+                        応募済み
+                      </Button>
+                    :
+                      <TaskApplyModal task={task} applyForTask={this.applyForTask} />
+                  }
+                </React.Fragment>
             }
           </div>
           :

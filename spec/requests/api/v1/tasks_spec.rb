@@ -45,4 +45,5 @@ describe Api::V1::TasksController, type: :request do
       expect(json['task_applications'][1]['applicant_name']).to eq('user3')
     end
   end
+
 end

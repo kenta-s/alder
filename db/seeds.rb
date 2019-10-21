@@ -43,7 +43,7 @@ Task.create([
   {
     title: 'ウェブアプリケーション機能開発',
     description: '個人で開発しているプロジェクトの機能開発を手伝ってください',
-    status: :open,
+    status: :closed,
     end_at: Time.zone.local(2019, 10, 10, 11, 30)
   },
   {

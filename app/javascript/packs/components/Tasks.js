@@ -29,14 +29,14 @@ class Tasks extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell>Title</TableCell>
-              <TableCell>Expires at</TableCell>
+              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tasks.map(task => (
               <TableRow key={task.id} hover style={{cursor: 'pointer'}} onClick={() => this.props.history.push(`/tasks/${task.id}`)}>
                 <TableCell>{task.title}</TableCell>
-                <TableCell>{task.end_at}</TableCell>
+                <TableCell>{task.status}</TableCell>
               </TableRow>
             ))}
           </TableBody>
