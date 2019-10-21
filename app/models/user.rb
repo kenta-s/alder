@@ -7,8 +7,14 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
 
+  ALLOWED_CHARACTERS = [
+    '-',
+    '_',
+  ].freeze
+
   validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 16 }
+  validate :name_cannot_have_special_characters
 
   has_many :task_applications, dependent: :destroy
   has_many :sent_messages, class_name: :Message, foreign_key: :sender_id, dependent: :destroy
@@ -24,4 +30,21 @@ class User < ApplicationRecord
   before_create do |user|
     user.status = :apprentice
   end
+
+  private
+
+  def name_cannot_have_special_characters
+    return true if name.blank?
+    
+    unless name =~ /\A[a-zA-Z0-9\-\_]+\z/
+      self.errors[:base] << 'userIDに使える文字は半角英数字と-(ハイフン)、_(アンダーバー)のみです'
+    end
+
+    if ALLOWED_CHARACTERS.include?(name.first) || ALLOWED_CHARACTERS.include?(name.last)
+      self.errors[:base] << 'userIDの最初と最後には特殊文字は使えません'
+    end
+
+    true
+  end
+
 end
