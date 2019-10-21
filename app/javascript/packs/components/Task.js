@@ -33,9 +33,9 @@ class Task extends React.Component {
     const task = this.props.task
     const currentUser = this.props.currentUser.attributes
     const applied = task.taskApplications.some(application => application.applicant_name === currentUser.name)
-    const description = task.description.split("\n").map(line => {
+    const description = task.description.split("\n").map((line, i) => {
       return(
-        <React.Fragment>
+        <React.Fragment key={`description-${i}`}>
           {line}
           <br />
         </React.Fragment>
