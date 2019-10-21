@@ -14,7 +14,6 @@ const config = {
     email: 'email',
     password: 'password',
     passwordConfirmation: 'password_confirmation',
-    status: 'status',
   },
 }
 

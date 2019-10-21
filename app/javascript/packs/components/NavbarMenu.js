@@ -19,7 +19,7 @@ const NavbarMenu = ({open, handleDrawerOpen, currentUser}) => {
 
   return (
     <React.Fragment>
-      { currentUser.isSignedIn &&
+      { currentUser.isSignedIn && window.location.pathname !== '/thankyou' && window.location.pathname !== '/signup' &&
         <IconButton
           edge="start"
           color="inherit"

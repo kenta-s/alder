@@ -38,7 +38,7 @@ const UserSignUp = (props) => {
   const classes = useStyles();
   React.useEffect(() => {
     redirectUnlessGuest(currentUser)
-  })
+  }, [])
   const [values, setValues] = React.useState({
     name: '',
     email: '',
