@@ -5,8 +5,8 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link" href="#about">詳細</a></li>
-          <!--
           <li class="nav-item"><a class="nav-link" href="#pricing">料金</a></li>
+          <!--
           <li class="nav-item"><a class="nav-link" href="#contact">問い合わせ</a></li>
           -->
           <li class="nav-item"><%= link_to 'ログイン', signin_index_path, class: 'nav-link' %></li>
@@ -113,7 +113,7 @@
           <div class="col-10">
             <h5 class="font-bold">1. タスクを選ぶ</h5>
             <p class="grey-text">
-              プロプログラミングで興味のある「タスク」を見つけたら応募します。その後タスクを作成した担当者(プログラマー)からの連絡を待ちます。
+              興味のある「タスク」を見つけたら応募します。その後タスクを作成した担当者(プログラマー)からの連絡を待ちます。
             </p>
           </div>
         </div>
@@ -137,5 +137,52 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="text-center py-5 indigo darken-1 text-white" id="pricing">
+  <div class="container">
+    <div class="wow fadeIn">
+      <h2 class="h1 pt-5 pb-3">料金</h2>
+      <p class="px-5 mb-5 pb-3 lead">
+        現在プロプログラミングはベータ版のため無料でご利用いただけます。
+      </p>
+    </div>
+    <div class="row wow zoomIn">
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card card-image">
+          <div class="text-white text-center pricing-card d-flex align-items-center rgba-stylish-strong py-3 px-3 rounded">
+            <div class="card-body">
+              <div class="h5">タスク単位</div>
+              <div class="py-5"><sup class="display-4">&yen;</sup><span class="display-1">0</span></div>
+              <%= link_to 'はじめる', signup_index_path, class: 'btn btn-outline-white mt-5' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card card-image">
+          <div class="text-white text-center pricing-card d-flex align-items-center rgba-teal-strong py-3 px-3 rounded">
+            <div class="card-body">
+              <div class="h5">1ヵ月</div>
+              <div class="py-5"><sup class="display-4">&yen;</sup><span class="display-1">0</span></div>
+              <%= link_to 'はじめる', signup_index_path, class: 'btn btn-outline-white mt-5' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card card-image">
+          <div class="text-white text-center pricing-card d-flex align-items-center rgba-red-strong py-3 px-3 rounded">
+            <div class="card-body">
+              <div class="h5">3ヵ月</div>
+              <div class="py-5"><sup class="display-4">&yen;</sup><span class="display-1">0</span></div>
+              <%= link_to 'はじめる', signup_index_path, class: 'btn btn-outline-white mt-5' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>※本稼働後は有料化を予定しています</p>
   </div>
 </section>
