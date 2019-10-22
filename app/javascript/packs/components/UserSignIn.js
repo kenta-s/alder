@@ -40,8 +40,8 @@ class UserSignIn extends React.Component {
         this.props.history.push('/tasks')
         this.props.flashMessage('ログインしました')
       })
-      .catch(error => {
-        console.log('error')
+      .catch(() => {
+        this.props.flashMessage('メールアドレスまたはパスワードが間違っています', {isError: true})
       })
   }
 
@@ -80,7 +80,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    flashMessage: (message) => dispatch(flashMessage(message)), 
+    flashMessage: (message, option) => dispatch(flashMessage(message, option)), 
     signInUser: (data) => dispatch(signInUser(data)),
     redirectUnlessGuest: currentUser => dispatch(redirectUnlessGuest(currentUser)),
   }
