@@ -68,6 +68,7 @@ const mainConfig = mode => {
       applicationStyle: './css/application.scss',
       landingPage: './landingPage.js',
       landingPageStyle: './css/landing/landingPage.scss',
+			task: './images/landing/task.png',
     },
   })
 }
