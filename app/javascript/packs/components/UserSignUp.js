@@ -10,6 +10,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { flashMessage } from 'redux-flash'
 import { registerUser } from '../redux-token-auth-config'
 import {
   redirectUnlessGuest,
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UserSignUp = (props) => {
-  const { registerUser, history, currentUser, redirectUnlessGuest } = props
+  const { registerUser, history, currentUser, redirectUnlessGuest, flashMessage } = props
   const classes = useStyles();
   React.useEffect(() => {
     redirectUnlessGuest(currentUser)
@@ -58,15 +59,24 @@ const UserSignUp = (props) => {
         history.push('/thankyou')
       })
       .catch(error => {
+        flashMessage('登録に失敗しました。入力内容をご確認ください。', {isError: true})
         console.error(error)
       })
+  }
+
+  const validateInputs = () => {
+    const nameMt2Length = values.name.length > 2
+    const emailNotEmpty = values.email !== ''
+    const passwordMt5Length = values.password.length > 5
+    const passwordMatchesConfirmation = values.password === values.passwordConfirmation
+    return (nameMt2Length && emailNotEmpty && passwordMt5Length && passwordMatchesConfirmation)
   }
 
   return (
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
-          label="User ID"
+          label="User ID(3字以上半角英数字)"
           fullWidth
           margin="normal"
           onChange={handleChange('name')}
@@ -80,7 +90,7 @@ const UserSignUp = (props) => {
           value={values.email}
         />
         <TextField
-          label="パスワード"
+          label="パスワード(6字以上)"
           fullWidth
           margin="normal"
           type="password"
@@ -104,7 +114,7 @@ const UserSignUp = (props) => {
           </RadioGroup>
         </FormControl>
       */ }
-      <Button variant="contained" color="primary" onClick={signUp} disabled={!(values.name !== '' && values.email !== '' && values.password !== '' && values.passwordConfirmation !== '' && values.password === values.passwordConfirmation)}>
+      <Button variant="contained" color="primary" onClick={signUp} disabled={!validateInputs()}>
         サインアップ
       </Button>
       </form>
@@ -129,6 +139,7 @@ const mapDispatchToProps = dispatch => {
   return {
     registerUser: (data) => dispatch(registerUser(data)),
     redirectUnlessGuest: currentUser => dispatch(redirectUnlessGuest(currentUser)),
+    flashMessage: (message, option) => dispatch(flashMessage(message, option)), 
   }
 }
 
