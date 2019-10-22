@@ -9,11 +9,9 @@ import {
   authenticateUser,
 } from "../redux/actions/common"
 import { withRouter } from 'react-router'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Title from './Title';
@@ -25,6 +23,13 @@ const useStyles = makeStyles({
   },
   table: {
     minWidth: 650,
+  },
+  myCard: {
+    backgroundColor: '#2196F3',
+    color: '#FFFFFF',
+  },
+  message: {
+    marginBottom: 8,
   },
 });
 
@@ -38,8 +43,32 @@ function Messages({messages, fetchMessages, postMessage, match, currentUser, aut
 
   const [newMessage, setNewMessage] = useState('')
 	const userName = match.params.name
-  const rows = messages.filter(message => {
-	  return message.senderName === userName || message.recipientName === userName
+  const rows = messages.map((message, i) => {
+    if(message.senderName === userName){
+      return(
+        <Grid container direction="row" key={`message-${i}`} className={classes.message}>
+          <Grid item xs={10} sm={8} md={6}>
+            <Card>
+              <CardContent>
+                {message.content}
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      )
+    }else if(message.recipientName === userName){
+      return(
+        <Grid container direction="row-reverse" key={`message-${i}`} className={classes.message}>
+          <Grid item xs={10} sm={8} md={6}>
+            <Card className={classes.myCard}>
+              <CardContent>
+                {message.content}
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      )
+    }
 	})
   const sendMessage = () => {
     postMessage(newMessage, match.params.name).then(response => {
@@ -50,24 +79,7 @@ function Messages({messages, fetchMessages, postMessage, match, currentUser, aut
   return (
     <React.Fragment>
       <Title>Messages</Title>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>content</TableCell>
-            <TableCell align="right">sent at</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.content}
-              </TableCell>
-              <TableCell align="right">{row.sentAt}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {rows}
 
       <TextField
         label="message"
