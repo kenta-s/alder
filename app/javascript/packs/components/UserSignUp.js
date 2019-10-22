@@ -14,6 +14,7 @@ import { registerUser } from '../redux-token-auth-config'
 import {
   redirectUnlessGuest,
 } from "../redux/actions/common"
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -103,10 +104,17 @@ const UserSignUp = (props) => {
           </RadioGroup>
         </FormControl>
       */ }
-      </form>
       <Button variant="contained" color="primary" onClick={signUp} disabled={!(values.name !== '' && values.email !== '' && values.password !== '' && values.passwordConfirmation !== '' && values.password === values.passwordConfirmation)}>
         サインアップ
       </Button>
+      </form>
+
+      <br />
+
+      <Link to='/signin'>
+        アカウントをお持ちの方はこちらからログイン
+      </Link>
+      
     </React.Fragment>
   );
 }

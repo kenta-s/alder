@@ -33,7 +33,8 @@ class UserSignIn extends React.Component {
 		})
   };
 
-  signIn = () => {
+  signIn = (e) => {
+    e.preventDefault()
  	  this.props.signInUser({ email:this.state.email, password:this.state.password })
       .then(response => {
         this.props.history.push('/tasks')
@@ -46,7 +47,7 @@ class UserSignIn extends React.Component {
 
 	render(){
 	  return(
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={this.signIn}>
         <TextField
           label="Email"
           fullWidth
@@ -63,7 +64,7 @@ class UserSignIn extends React.Component {
           value={this.state.password}
           autoComplete="current-password"
         />
-        <Button variant="contained" color="primary" onClick={this.signIn}>
+        <Button type="submit" variant="contained" color="primary">
           ログイン
         </Button>
       </form>
