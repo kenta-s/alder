@@ -11,6 +11,10 @@
       
         gtag('config', 'UA-39587251-7');
         gtag('config', 'AW-708023816');
+
+      <% if request.path == '/thankyou' %>
+        gtag('event', 'conversion', {'send_to': 'AW-708023816/YT3BCKq6kLEBEIisztEC'});
+      <% end %>
       </script>
     <% end %>
 
