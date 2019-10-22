@@ -202,8 +202,8 @@ const App = ({history}) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
+          <Grid container spacing={3} justify="center">
+            <Grid item xs={12} sm={10}>
               <Paper className={classes.paper}>
                 <Switch>
                   <Route exact path="/tasks" component={Tasks} />
