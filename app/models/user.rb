@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   # TODO: remove this callback when professional is ready
   before_create do |user|
-    user.status = :apprentice
+    user.status ||= :apprentice
   end
 
   private

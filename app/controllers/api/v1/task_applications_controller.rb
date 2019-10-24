@@ -11,6 +11,8 @@ class Api::V1::TaskApplicationsController < ApplicationController
   def create
     @task_application = current_user.task_applications.build(task_application_params.merge(status: :pending))
     if @task_application.save
+      task = Task.find(task_application_params[:task_id])
+      TaskApplicationMailer.with(user: current_user, task: task).applied.deliver_later
       render template: "api/v1/task_applications/show", status: 201
     else
       render template: "api/v1/task_applications/show", status: 422
