@@ -10,7 +10,7 @@ the concept is:
 
 top page screen shot:
 
-text: ![proprogramming](screenshots/proprogramming_top.PNG)
+text: ![proprogramming](screenshots/proprogramming-top.PNG)
 
 But I gave up for multiple reasons(ask me in person if you are interested), and I make this into a public repository.
 
