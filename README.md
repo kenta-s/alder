@@ -12,7 +12,7 @@ top page screen shot:
 
 ![proprogramming](screenshots/proprogramming-top.PNG)
 
-But I gave up for multiple reasons(ask me in person if you are interested), and I make this into a public repository.
+I released this web app, but I found this web app would not be a hit for multiple reasons(ask me in person if you are interested). I need to try next idea and no time to keep developping this anymore.
 
 I used:
 
