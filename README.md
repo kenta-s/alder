@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Alder is one of my tries; create a good product to make impacts on this world.
 
-Things you may want to cover:
+the concept is:
 
-* Ruby version
+- this is for people who want to be a software developer
+- they can find "actual" problems on this web site
+- they need to solve the problems with experienced programmer so that they can learn "Actual level" of programming
 
-* System dependencies
+top page screen shot:
 
-* Configuration
+text: ![proprogramming](screenshots/proprogramming_top.PNG)
 
-* Database creation
+But I gave up for multiple reasons(ask me in person if you are interested), and I make this into a public repository.
 
-* Database initialization
+I used:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Ruby on Rails
+- React/Redux
+- Material-ui
+- MySQL
